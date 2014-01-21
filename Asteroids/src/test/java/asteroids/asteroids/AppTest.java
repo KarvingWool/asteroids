@@ -71,4 +71,6 @@ public class AppTest
         assertEquals(-2.0, a.getMoveDir());
 
     }
+    
+    
 }
