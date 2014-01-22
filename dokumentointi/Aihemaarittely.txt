@@ -1,0 +1,9 @@
+Aihemäärittely
+
+Aihe: Asteroids peli
+Peli, jossa pelaaja ohjaa alusta jonka on tarkoitus tuhota kaikki asteroidit kentältä, saamalla välttäen niihin törmäystä.
+Käyttäjät: Pelaaja
+Pelaajan toiminnot:
+· Lasertykki, jota käytetään asteroidejen tuhoamiseen.
+· Ohjausjärjestelmä
+

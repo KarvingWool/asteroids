@@ -1,0 +1,16 @@
+Tuntikirjanpito
+
+14.01.2014 14:00-16:00
+Aiheen valinta, repositorion luonti, sekä Netbeans-projektin luonti sekä konfigurointi.
+
+16.01.2014 10:00-11:00
+Ship, asteroid, laser luokkien ja niiden perus metodejen luonti.
+
+21.01.2014 20:00-21:30
+VectorShape luokan luonti, ja sen periminen toisiin luokkiin. 
+Ship, asteroid ja laser- luokkien metodejen siirtäminen VectorShape luokkaan. 
+Testit Ship aloituskohdasta ja alkukäytöksestä. 
+
+22.01.2014 21:30-00:30
+Rectangle import. Sekä getBounds, rotationVel, collision- metodit ja testit.
+Physics luokan luonti. Physics luokan metodit collisionCount, deadRemoval, shoot; Sekä näiden testit.
