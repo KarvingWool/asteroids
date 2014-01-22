@@ -4,6 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import raw.Asteroid;
+import raw.Laser;
 import raw.Ship;
 
 public class AppTest
@@ -32,45 +33,92 @@ public class AppTest
         assertTrue(true);
     }
 
-    public void shipStartingPositionCorrect() {
+    public void testShipStartingPositionCorrect() {
         Ship a = new Ship();
         assertEquals(0.0, a.getX());
         assertEquals(0.0, a.getY());
         assertEquals(0.0, a.getFaceDir());
     }
 
-    public void shipAliveAndNotMovingInBeginning() {
+    public void testShipAliveAndNotMovingBeginning() {
         Ship a = new Ship();
         assertEquals(0.0, a.getVelX());
         assertEquals(0.0, a.getVelY());
         assertEquals(true, a.getAlive());
     }
 
-    public void VectorShapeSettersWork() {
-        Ship a = new Ship();
+    public void testAsteroidRotationVel() {
+        Asteroid a = new Asteroid();
 
-        a.setVelX(2.0);
-        assertEquals(2.0, a.getVelX());
+        if (a.getRotationVel() < 0 || a.getRotationVel() > 5) {
+            assertTrue(false);
+        }
+    }
 
-        a.setVelY(12.0);
-        assertEquals(12.0, a.getVelY());
+    public void testShipAsteroidCollision() {
+        Asteroid a = new Asteroid();
+        Ship s = new Ship();
 
-        a.setX(107.0);
-        assertEquals(107.0, a.getX());
+        assertTrue(s.collision(a));
+    }
 
-        a.setY(2.7);
-        assertEquals(2.7, a.getY());
+    public void testLaserAsteroidCollision() {
+        Asteroid a = new Asteroid();
+        Laser l = new Laser(0, 0, 0);
 
-        a.setAlive(false);
-        assertEquals(false, a.getAlive());
+        assertTrue(l.collision(a));
+    }
 
-        a.setFaceDir(-32.0);
-        assertEquals(-32.0, a.getFaceDir());
+    public void testAsteroidLaserStartAmount() {
+        Physics p = new Physics();
+        assertEquals(20, p.getAsteroids().size());
+        assertEquals(0, p.getLasers().size());
+    }
 
-        a.setMoveDir(-2.0);
-        assertEquals(-2.0, a.getMoveDir());
+    public void testShoot() {
+        Physics p = new Physics();
+        p.getShip().setX(20);
+        p.getShip().setY(-15);
+        p.getShip().setFaceDir(15);
+        p.shoot();
+        p.shoot();
+        p.shoot();
+
+        assertEquals(3, p.getLasers().size());
+
+        assertEquals(20.0, p.getLasers().get(0).getX());
+        assertEquals(-15.0, p.getLasers().get(0).getY());
+        assertEquals(15.0, p.getLasers().get(0).getMoveDir());
+    }
+
+    public void testCollisionCount() {
+        Physics p = new Physics();
+
+        for (int i = 0; i < 20; i++) {
+            p.shoot();
+        }
+        p.collisionCount();
+        assertFalse(p.getShip().getAlive());
+        for (int i = 0; i < 20; i++) {
+            assertFalse(p.getAsteroids().get(i).getAlive());
+        }
+
 
     }
-    
-    
+
+    public void testDeadRemoval() {
+        Physics p = new Physics();
+        p.shoot();
+        p.shoot();
+        p.collisionCount();
+        p.deadRemoval();
+        assertEquals(18, p.getAsteroids().size());
+        
+        for (int i = 0; i < 18; i++) {
+            p.shoot();
+        }
+        p.collisionCount();
+        p.deadRemoval();
+        assertEquals(0, p.getAsteroids().size());
+    }
 }
