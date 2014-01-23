@@ -8,11 +8,5 @@ import raw.VectorShape;
 public class App {
 
     public static void main(String[] args) {
-        Physics p = new Physics();
-
-        for (int i = 0; i < 20; i++) {
-            p.shoot();
-        }
-        p.collisionCount();
     }
 }
