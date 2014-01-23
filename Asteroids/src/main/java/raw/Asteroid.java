@@ -11,6 +11,7 @@ public class Asteroid extends VectorShape {
     public Asteroid() {
         super();
         this.rotationVel = random.nextInt(5);
+        super.setFaceDir(random.nextInt(359));
     }
     
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import raw.Asteroid;
 import raw.Laser;
 import raw.Ship;
+import raw.VectorShape;
 
 public class Physics {
 
@@ -71,6 +72,15 @@ public class Physics {
             lasers.remove(d - i);
             i++;
         }
+    }
+    
+    public void movement(VectorShape v){
+        
+        v.setVelX(Math.sin(Math.toRadians(v.getFaceDir()+90))*v.getSpeed());
+        v.setVelY(Math.cos(Math.toRadians(v.getFaceDir()+90))*v.getSpeed());
+        
+        v.setX(v.getX()+v.getVelX());
+        v.setY(v.getY()+v.getVelY());
     }
 
     public void shoot() {

@@ -9,8 +9,6 @@ import raw.Ship;
 
 public class AppTest {
 
-
-    
     @Test
     public void testShipStartingPositionCorrect() {
         Ship a = new Ship();
@@ -42,7 +40,7 @@ public class AppTest {
         Ship s = new Ship();
 
         assertTrue(s.collision(a));
-        
+
         s.setX(50);
         assertFalse(s.collision(a));
     }
@@ -53,7 +51,7 @@ public class AppTest {
         Laser l = new Laser(0, 0, 0);
 
         assertTrue(l.collision(a));
-        
+
         l.setX(-45);
         assertFalse(l.collision(a));
     }
@@ -95,7 +93,6 @@ public class AppTest {
             assertFalse(p.getAsteroids().get(i).getAlive());
         }
 
-
     }
 
     @Test
@@ -106,12 +103,25 @@ public class AppTest {
         p.collisionCount();
         p.deadRemoval();
         assertEquals(18, p.getAsteroids().size());
-        
+
         for (int i = 0; i < 18; i++) {
             p.shoot();
         }
         p.collisionCount();
         p.deadRemoval();
         assertEquals(0, p.getAsteroids().size());
+    }
+
+    @Test
+    public void movementCalculatesVelXYCorrectly() {
+        Physics p = new Physics();
+        
+        p.getShip().setFaceDir(180);
+        p.getShip().setSpeed(15);
+        
+        p.movement(p.getShip());
+        
+        assertEquals(-15, p.getShip().getX(), 0.01);
+        assertEquals(0, p.getShip().getY(), 0.01);
     }
 }

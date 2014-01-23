@@ -3,7 +3,7 @@ package raw;
 public class VectorShape {
 
     private double x, y;
-    private double velX, velY;
+    private double velX, velY, speed;
     private double moveDir, faceDir;
     private boolean alive;
 
@@ -14,9 +14,13 @@ public class VectorShape {
         setVelY(0.0);
         setMoveDir(0.0);
         setFaceDir(0.0);
+        setSpeed(0.0);
         setAlive(true);
     }
 
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 
     public void setVelX(double velocityX) {
         this.velX = velocityX;
@@ -44,6 +48,12 @@ public class VectorShape {
 
     public void setY(double y) {
         this.y = y;
+    }
+
+    
+    
+    public double getSpeed() {
+        return speed;
     }
 
     public double getVelX() {
