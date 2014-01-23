@@ -16,10 +16,8 @@ public class VectorShape {
         setFaceDir(0.0);
         setAlive(true);
     }
-    
-    
 
-    
+
     public void setVelX(double velocityX) {
         this.velX = velocityX;
     }
@@ -48,8 +46,6 @@ public class VectorShape {
         this.y = y;
     }
 
-    
-    
     public double getVelX() {
         return velX;
     }
