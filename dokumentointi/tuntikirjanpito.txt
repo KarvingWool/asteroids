@@ -14,3 +14,6 @@ Testit Ship aloituskohdasta ja alkukäytöksestä.
 22.01.2014 21:30-00:30
 Rectangle import. Sekä getBounds, rotationVel, collision- metodit ja testit.
 Physics luokan luonti. Physics luokan metodit collisionCount, deadRemoval, shoot; Sekä näiden testit.
+
+23.01.2014 14:00-16:00
+Metodi movement luonti ja testi.
