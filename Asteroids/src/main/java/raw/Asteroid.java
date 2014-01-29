@@ -13,7 +13,7 @@ public class Asteroid extends VectorShape {
         this.rotationVel = random.nextInt(5);
         super.setFaceDir(random.nextInt(359));
         super.setX(random.nextInt(400)-200);
-        
+        super.setSpeed(random.nextInt(3)+3);
         if(random.nextBoolean()){
             super.setY(100);
         } else {

@@ -17,7 +17,7 @@ public class PhysicsTest {
     }
 
     @Test
-    public void testLaserStartingNumbersThroughShoot() {
+    public void testLaserStartingAtrtributesThroughShoot() {
         Physics p = new Physics();
         p.getShip().setX(20);
         p.getShip().setY(-15);
@@ -79,12 +79,26 @@ public class PhysicsTest {
     public void movementCalculatesVelXYCorrectly() {
         Physics p = new Physics();
 
-        p.getShip().setFaceDir(180);
+        p.getShip().setMoveDir(180);
         p.getShip().setSpeed(15);
 
         p.movement(p.getShip());
 
         assertEquals(-15, p.getShip().getX(), 0.01);
         assertEquals(0, p.getShip().getY(), 0.01);
+    }
+    
+    @Test
+    public void testRoundOfMovement(){
+        Physics p = new Physics();
+        
+        p.getShip().setMoveDir(180);
+        p.getShip().setSpeed(5);
+        p.shoot();
+        
+        p.movement(p.getLasers().get(0));
+        
+        assertEquals(-10, p.getLasers().get(0).getX(), 0.01);
+        assertEquals(-5, p.getShip().getX(), 0.01);
     }
 }

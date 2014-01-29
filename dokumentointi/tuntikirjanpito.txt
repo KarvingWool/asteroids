@@ -17,3 +17,9 @@ Physics luokan luonti. Physics luokan metodit collisionCount, deadRemoval, shoot
 
 23.01.2014 14:00-16:00
 Metodi movement luonti ja testi.
+
+28.01.2014 15.00-17.00
+Testejen jako luokkakohtaisiksi, asteroidin aloituspaikan generointi ja testaus sekä kokonaisuuden heinosäätö asteroidin konstruktorin muuttuessa.
+
+29.01.2014 13.45-15.15
+FaceDir muokattu pysymään 0-359 välillä, ja tähän liittyvät testit. setFaceDir ja setMoveDir muokattu vaihtamaan vain jos arvo on 0-359 välillä. Metodi roundOfMovement lisätty ja testattu. Alku nopeus annettu luokille ja testattu.

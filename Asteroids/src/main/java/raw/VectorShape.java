@@ -31,11 +31,15 @@ public class VectorShape {
     }
 
     public void setMoveDir(double moveDir) {
-        this.moveDir = moveDir;
+        if(moveDir>-1&&moveDir<360){
+            this.moveDir = moveDir;
+        }
     }
 
     public void setFaceDir(double faceDir) {
-        this.faceDir = faceDir;
+        if(faceDir>-1&&faceDir<360){
+            this.faceDir=faceDir;
+        }
     }
 
     public void setAlive(boolean alive) {

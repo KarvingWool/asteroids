@@ -22,11 +22,11 @@ public class Physics {
 
     public void game() {
         while (ship.getAlive()) {
-
+            roundOfMovement();
             collisionCount();
             deadRemoval();
         }
-
+        System.out.println("Game over");
     }
 
     public void collisionCount() {
@@ -74,14 +74,29 @@ public class Physics {
         }
     }
     
+    public void roundOfMovement(){
+        movement(ship);
+        for(Asteroid a : asteroids){
+            movement(a);
+        }
+        for(Laser l : lasers){
+            movement(l);
+        }
+    }
+    
     public void movement(VectorShape v){
         
-        v.setVelX(Math.sin(Math.toRadians(v.getFaceDir()+90))*v.getSpeed());
-        v.setVelY(Math.cos(Math.toRadians(v.getFaceDir()+90))*v.getSpeed());
+        v.setVelX(Math.sin(Math.toRadians(v.getMoveDir()+90))*v.getSpeed());
+        v.setVelY(Math.cos(Math.toRadians(v.getMoveDir()+90))*v.getSpeed());
         
         v.setX(v.getX()+v.getVelX());
         v.setY(v.getY()+v.getVelY());
     }
+    
+    public void accelerate(){
+        
+    }
+    
 
     public void shoot() {
         Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());

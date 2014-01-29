@@ -21,13 +21,4 @@ public class LaserTest {
         l.setX(-45);
         assertFalse(l.collision(a));
     }
-    
-    @Test
-    public void testLaserStartingNumbers(){
-        Physics p = new Physics();
-        
-        p.getShip().setX(-20);
-        p.getShip().setY(50);
-        p.shoot();
-    }
 }
