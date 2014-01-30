@@ -13,7 +13,7 @@ Testit Ship aloituskohdasta ja alkukäytöksestä.
 
 22.01.2014 21:30-00:30
 Rectangle import. Sekä getBounds, rotationVel, collision- metodit ja testit.
-Physics luokan luonti. Physics luokan metodit collisionCount, deadRemoval, shoot; Sekä näiden testit.
+Physics luokan luonti. Physics luokan metodit collisionCount, deadRemoval, shoot, sekä näiden testit.
 
 23.01.2014 14:00-16:00
 Metodi movement luonti ja testi.
@@ -22,9 +22,14 @@ Metodi movement luonti ja testi.
 Testejen jako luokkakohtaisiksi, asteroidin aloituspaikan generointi ja testaus sekä kokonaisuuden heinosäätö asteroidin konstruktorin muuttuessa. turnLeft ja right metodit luotu Ship luokalle, sekä kordinaatiston muutos että 90 astetta on ylöspäin.
 
 29.01.2014 13.45-15.15
-FaceDir muokattu pysymään 0-359 välillä, ja tähän liittyvät testit. setFaceDir ja setMoveDir muokattu vaihtamaan vain jos arvo on 0-359 välillä. Metodi roundOfMovement lisätty ja testattu. Alku nopeus annettu luokille ja testattu.
+FaceDir muokattu pysymään 0-359 välillä, tähän liittyvät testit myös muokattu. setFaceDir ja setMoveDir muokattu vaihtamaan vain jos arvo on 0-359 välillä. Metodi roundOfMovement lisätty ja testattu. Alku nopeus annettu luokille ja testattu.
 
-30.01.2014
+30.01.2014 13:30-15:45
 Accelerate metodi luotu, ja sen myötä movement metodi tehty ainoastaan liikuttamaan, ei laskemaan.
 Speed atribuutin poistaminen, ja sen takia testejen ja luokkien säätö ei-speed riippuvaisiksi.
 Asteroid luokan alkuliike tehty ja testattu. Laser alkuliike tehty accelerate metodin kautta. MoveDir atribuutti poistettu.
+
+30.01.2014 23:30 - 31.01.2013 01:00
+Before metodin luonti kaikkiin testi-luokkiin. Decelerate metodin luonti ja testaus.
+ButtonResponse luokan luonti, sekä keyPressed metodin luonti. Tyhjä Kayttoliittymä luokka luotu.
+UML kaavio laajennettu ja tarkennettu.
