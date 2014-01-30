@@ -73,34 +73,34 @@ public class Physics {
             i++;
         }
     }
-    
-    public void roundOfMovement(){
+
+    public void roundOfMovement() {
         movement(ship);
-        for(Asteroid a : asteroids){
+        for (Asteroid a : asteroids) {
             movement(a);
         }
-        for(Laser l : lasers){
+        for (Laser l : lasers) {
             movement(l);
         }
     }
-    
-    public void movement(VectorShape v){
-        
-        v.setVelX(Math.sin(Math.toRadians(v.getMoveDir()+90))*v.getSpeed());
-        v.setVelY(Math.cos(Math.toRadians(v.getMoveDir()+90))*v.getSpeed());
-        
-        v.setX(v.getX()+v.getVelX());
-        v.setY(v.getY()+v.getVelY());
+
+    public void movement(VectorShape v) {
+        v.setX(v.getX() + v.getVelX());
+        v.setY(v.getY() + v.getVelY());
     }
-    
-    public void accelerate(){
-        
+
+    public void accelerate(VectorShape v) {
+        v.setVelY(v.getVelY()+Math.sin(Math.toRadians(v.getFaceDir())));
+        v.setVelX(v.getVelX()-Math.cos(Math.toRadians(v.getFaceDir())));
     }
-    
 
     public void shoot() {
         Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
         lasers.add(l);
+        
+        while((l.getVelX()*l.getVelX()+(l.getVelY()*l.getVelY()))<100){
+            accelerate(l);
+        }
     }
 
     public ArrayList<Asteroid> getAsteroids() {

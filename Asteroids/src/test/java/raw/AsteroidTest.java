@@ -38,15 +38,4 @@ public class AsteroidTest {
         
     }
     
-    @Test
-    public void testAsteroidStartingSpeed(){
-        for(int i=0;i<20;i++){
-            Asteroid a = new Asteroid();
-            
-            if(a.getSpeed()<3||a.getSpeed()>6){
-                assertTrue(false);
-            }
-        }
-        
-    }
 }

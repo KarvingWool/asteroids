@@ -8,9 +8,8 @@ public class Laser extends VectorShape {
         super();
         super.setX(x);
         super.setY(y);
-        super.setMoveDir(dir);
         super.setFaceDir(dir);
-        super.setSpeed(10);
+        
     }
 
     public boolean collision(Asteroid a) {

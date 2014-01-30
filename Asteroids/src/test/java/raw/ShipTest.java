@@ -14,7 +14,7 @@ public class ShipTest {
         Ship a = new Ship();
         assertEquals(0.0, a.getX(), 0.001);
         assertEquals(0.0, a.getY(), 0.001);
-        assertEquals(0.0, a.getFaceDir(), 0.01);
+        assertEquals(90, a.getFaceDir(), 0.01);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class ShipTest {
     public void testShipTurning() {
         Ship a = new Ship();
         
-        for(int i=0;i<35;i++){
+        for(int i=0;i<125;i++){
             a.turnLeft();
         }
         assertEquals(325, a.getFaceDir(), 0.01);
