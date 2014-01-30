@@ -96,6 +96,11 @@ public class Physics {
         v.setVelY(v.getVelY()+Math.sin(Math.toRadians(v.getFaceDir())));
         v.setVelX(v.getVelX()-Math.cos(Math.toRadians(v.getFaceDir())));
     }
+    
+    public void decelerate(VectorShape v){
+        v.setVelY(v.getVelY()+Math.sin(Math.toRadians(v.getFaceDir()+180)));
+        v.setVelX(v.getVelX()-Math.cos(Math.toRadians(v.getFaceDir()+180)));
+    }
 
     public void shoot() {
         Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());

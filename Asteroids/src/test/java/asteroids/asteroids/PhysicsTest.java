@@ -3,42 +3,26 @@ package asteroids.asteroids;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import raw.Asteroid;
+import org.junit.Before;
 
 public class PhysicsTest {
-
-    public PhysicsTest() {
+    Physics p;
+    
+    @Before
+    public void before(){
+        p = new Physics();
     }
 
     @Test
     public void testAsteroidLaserStartAmount() {
-        Physics p = new Physics();
+       
+        
         assertEquals(20, p.getAsteroids().size());
         assertEquals(0, p.getLasers().size());
     }
 
     @Test
-    public void testLaserStartingAtrtributesThroughShoot() {
-        Physics p = new Physics();
-        p.getShip().setX(20);
-        p.getShip().setY(-15);
-        p.getShip().setFaceDir(0);
-        p.shoot();
-        p.shoot();
-        p.shoot();
-
-        assertEquals(3, p.getLasers().size());
-        assertEquals(-10, p.getLasers().get(0).getVelX(), 0.1);
-
-        for (int i = 0; i < 3; i++) {
-            assertEquals(20.0, p.getLasers().get(i).getX(), 0.01);
-            assertEquals(-15.0, p.getLasers().get(i).getY(), 0.01);
-        }
-    }
-
-    @Test
     public void testCollisionCount() {
-        Physics p = new Physics();
-
         for (int i = 0; i < 20; i++) {
             p.getAsteroids().get(i).setX(0);
             p.getAsteroids().get(i).setY(0);
@@ -55,7 +39,6 @@ public class PhysicsTest {
 
     @Test
     public void testDeadRemoval() {
-        Physics p = new Physics();
         p.shoot();
         p.shoot();
         for (Asteroid a : p.getAsteroids()) {
@@ -65,41 +48,66 @@ public class PhysicsTest {
         p.collisionCount();
         p.deadRemoval();
         assertEquals(18, p.getAsteroids().size());
+        assertEquals(0, p.getLasers().size());
 
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 20; i++) {
             p.shoot();
         }
         p.collisionCount();
         p.deadRemoval();
         assertEquals(0, p.getAsteroids().size());
+        assertEquals(2, p.getLasers().size());
+    }
+    
+    @Test
+    public void testMovementCalculationAccuracy(){
+        p.getShip().setVelX(5);
+        p.getShip().setVelY(-3);
+        p.movement(p.getShip());
+        assertEquals(5, p.getShip().getX(), 0.01);
+        assertEquals(-3, p.getShip().getY(), 0.01);
     }
 
     @Test
-    public void movementCalculatesVelXYCorrectly() {
-        Physics p = new Physics();
-
+    public void testAccelerateCalculatesVelXYCorrectly() {
         p.getShip().setFaceDir(180);
 
         for (int i = 0; i < 5; i++) {
             p.accelerate(p.getShip());
         }
         p.movement(p.getShip());
-        
         p.getShip().setFaceDir(90);
+        
         for (int i = 0; i < 5; i++) {
             p.accelerate(p.getShip());
         }
-
         p.movement(p.getShip());
-
         assertEquals(10, p.getShip().getX(), 0.01);
         assertEquals(5, p.getShip().getY(), 0.01);
+    }
+    
+    @Test
+    public void testDecelerateCalculatesVelXYCorrectly(){
+        p.getShip().setFaceDir(180);
+
+        for (int i = 0; i < 5; i++) {
+            p.decelerate(p.getShip());
+        }
+        p.movement(p.getShip());
+        assertEquals(-5, p.getShip().getX(), 0.01);
+   
+        p.getShip().setFaceDir(90);
+        for (int i = 0; i < 4; i++) {
+            p.decelerate(p.getShip());
+        }
+
+        p.movement(p.getShip());
+        assertEquals(-10, p.getShip().getX(), 0.01);
+        assertEquals(-4, p.getShip().getY(), 0.01);
     }
 
     @Test
     public void testRoundOfMovement() {
-        Physics p = new Physics();
-
         p.getShip().setFaceDir(270);
         p.shoot();
         p.getShip().setVelY(-3);

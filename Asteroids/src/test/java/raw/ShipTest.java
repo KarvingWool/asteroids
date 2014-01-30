@@ -2,33 +2,34 @@ package raw;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 public class ShipTest {
-
-    public ShipTest() {
+    Ship s;
+    
+    @Before
+    public void before() {
+        s = new Ship();
     }
 
     @Test
     public void testShipStartingPositionCorrect() {
 
-        Ship a = new Ship();
-        assertEquals(0.0, a.getX(), 0.001);
-        assertEquals(0.0, a.getY(), 0.001);
-        assertEquals(90, a.getFaceDir(), 0.01);
+        assertEquals(0.0, s.getX(), 0.001);
+        assertEquals(0.0, s.getY(), 0.001);
+        assertEquals(90, s.getFaceDir(), 0.01);
     }
 
     @Test
     public void testShipAliveAndNotMovingBeginning() {
-        Ship a = new Ship();
-        assertEquals(0.0, a.getVelX(), 0.01);
-        assertEquals(0.0, a.getVelY(), 0.01);
-        assertEquals(true, a.getAlive());
+        assertEquals(0.0, s.getVelX(), 0.01);
+        assertEquals(0.0, s.getVelY(), 0.01);
+        assertEquals(true, s.getAlive());
     }
 
     @Test
     public void testShipAsteroidCollision() {
         Asteroid a = new Asteroid();
-        Ship s = new Ship();
 
         a.setX(0);
         a.setY(0);
@@ -40,17 +41,16 @@ public class ShipTest {
 
     @Test
     public void testShipTurning() {
-        Ship a = new Ship();
         
         for(int i=0;i<125;i++){
-            a.turnLeft();
+            s.turnLeft();
         }
-        assertEquals(325, a.getFaceDir(), 0.01);
+        assertEquals(325, s.getFaceDir(), 0.01);
         
         for(int i=0;i<45;i++){
-            a.turnRight();
+            s.turnRight();
         }
-        assertEquals(10, a.getFaceDir(), 0.01);
+        assertEquals(10, s.getFaceDir(), 0.01);
     }
     
 }
