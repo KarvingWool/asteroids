@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import raw.Asteroid;
 import raw.Laser;
 import raw.Ship;
+import raw.VectorShape;
 
 public class Physics {
 
@@ -20,12 +21,15 @@ public class Physics {
     }
 
     public void game() {
+        int i  =0;
         while (ship.getAlive()) {
-
+            roundOfMovement();
             collisionCount();
             deadRemoval();
+            i++;
+            System.out.println(i);
         }
-
+        System.out.println("Game over");
     }
 
     public void collisionCount() {
@@ -73,9 +77,33 @@ public class Physics {
         }
     }
 
+    public void roundOfMovement() {
+        movement(ship);
+        for (Asteroid a : asteroids) {
+            movement(a);
+        }
+        for (Laser l : lasers) {
+            movement(l);
+        }
+    }
+
+    public void movement(VectorShape v) {
+        v.setX(v.getX() + v.getVelX());
+        v.setY(v.getY() + v.getVelY());
+    }
+
+    public void accelerate(VectorShape v) {
+        v.setVelY(v.getVelY()+Math.sin(Math.toRadians(v.getFaceDir())));
+        v.setVelX(v.getVelX()-Math.cos(Math.toRadians(v.getFaceDir())));
+    }
+
     public void shoot() {
         Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
         lasers.add(l);
+        
+        while((l.getVelX()*l.getVelX()+(l.getVelY()*l.getVelY()))<100){
+            accelerate(l);
+        }
     }
 
     public ArrayList<Asteroid> getAsteroids() {

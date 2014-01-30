@@ -4,7 +4,7 @@ public class VectorShape {
 
     private double x, y;
     private double velX, velY;
-    private double moveDir, faceDir;
+    private double faceDir;
     private boolean alive;
 
     public VectorShape() {
@@ -12,14 +12,12 @@ public class VectorShape {
         setY(0.0);
         setVelX(0.0);
         setVelY(0.0);
-        setMoveDir(0.0);
-        setFaceDir(0.0);
+
+        setFaceDir(90.0);
         setAlive(true);
     }
-    
-    
 
-    
+
     public void setVelX(double velocityX) {
         this.velX = velocityX;
     }
@@ -28,12 +26,10 @@ public class VectorShape {
         this.velY = velocityY;
     }
 
-    public void setMoveDir(double moveDir) {
-        this.moveDir = moveDir;
-    }
-
     public void setFaceDir(double faceDir) {
-        this.faceDir = faceDir;
+        if(faceDir>-1&&faceDir<360){
+            this.faceDir=faceDir;
+        }
     }
 
     public void setAlive(boolean alive) {
@@ -48,18 +44,12 @@ public class VectorShape {
         this.y = y;
     }
 
-    
-    
     public double getVelX() {
         return velX;
     }
 
     public double getVelY() {
         return velY;
-    }
-
-    public double getMoveDir() {
-        return moveDir;
     }
 
     public double getFaceDir() {

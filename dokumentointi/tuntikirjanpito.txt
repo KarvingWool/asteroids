@@ -14,3 +14,17 @@ Testit Ship aloituskohdasta ja alkukäytöksestä.
 22.01.2014 21:30-00:30
 Rectangle import. Sekä getBounds, rotationVel, collision- metodit ja testit.
 Physics luokan luonti. Physics luokan metodit collisionCount, deadRemoval, shoot; Sekä näiden testit.
+
+23.01.2014 14:00-16:00
+Metodi movement luonti ja testi.
+
+28.01.2014 15.00-17.00
+Testejen jako luokkakohtaisiksi, asteroidin aloituspaikan generointi ja testaus sekä kokonaisuuden heinosäätö asteroidin konstruktorin muuttuessa. turnLeft ja right metodit luotu Ship luokalle, sekä kordinaatiston muutos että 90 astetta on ylöspäin.
+
+29.01.2014 13.45-15.15
+FaceDir muokattu pysymään 0-359 välillä, ja tähän liittyvät testit. setFaceDir ja setMoveDir muokattu vaihtamaan vain jos arvo on 0-359 välillä. Metodi roundOfMovement lisätty ja testattu. Alku nopeus annettu luokille ja testattu.
+
+30.01.2014
+Accelerate metodi luotu, ja sen myötä movement metodi tehty ainoastaan liikuttamaan, ei laskemaan.
+Speed atribuutin poistaminen, ja sen takia testejen ja luokkien säätö ei-speed riippuvaisiksi.
+Asteroid luokan alkuliike tehty ja testattu. Laser alkuliike tehty accelerate metodin kautta. MoveDir atribuutti poistettu.
