@@ -21,10 +21,13 @@ public class Physics {
     }
 
     public void game() {
+        int i  =0;
         while (ship.getAlive()) {
             roundOfMovement();
             collisionCount();
             deadRemoval();
+            i++;
+            System.out.println(i);
         }
         System.out.println("Game over");
     }
