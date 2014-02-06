@@ -17,7 +17,7 @@ public class Physics {
 
     /**
      * Sets the height and width limits to the given parameters. Creates one
-     * ship and 20 asteroids, giving the asteroids random starting positions.
+     * ship and 20 asteroids, adding the asteroids to their array.
      *
      * @param width
      * @param height
@@ -31,12 +31,14 @@ public class Physics {
             asteroids.add(a);
         }
     }
-    
-    public void setup(){
-        for(Asteroid a : asteroids){
+    /**
+     * Puts all the asteroids and the ship in their starting position.
+     */
+    public void setup() {
+        ship.setX(width / 2);
+        ship.setY(height / 2);
+        for (Asteroid a : asteroids) {
             asteroidStartingPoint(a);
-            ship.setX(width/2);
-            ship.setY(height/2);
         }
     }
 
@@ -61,17 +63,6 @@ public class Physics {
             a.setVelY(1 + random.nextInt(3));
         }
 
-    }
-
-    public void game() {
-        int i = 0;
-        while (ship.getAlive()) {
-            roundOfMovement();
-            collisionCount();
-            deadRemoval();
-
-        }
-        System.out.println("Game over");
     }
 
     /**
@@ -127,6 +118,10 @@ public class Physics {
         }
     }
 
+    /**
+     * Applys the method movement to every VectorShape
+     * still present.
+     */
     public void roundOfMovement() {
         movement(ship);
         for (Asteroid a : asteroids) {
@@ -137,20 +132,27 @@ public class Physics {
         }
     }
 
+    /**
+     * Adds the velX and velY of parameter v, to x and y
+     * respectively. If the new x or y were to be out of bounds,
+     * the method wraps the x or y to the opposite side of the
+     * field.
+     * @param v 
+     */
     public void movement(VectorShape v) {
         v.setX(v.getX() + v.getVelX());
         v.setY(v.getY() + v.getVelY());
-        
-        if(v.getX()>this.width){
+
+        if (v.getX() > this.width) {
             v.setX(0);
         }
-        if(v.getX()<0){
+        if (v.getX() < 0) {
             v.setX(width);
         }
-        if(v.getY()>this.height){
+        if (v.getY() > this.height) {
             v.setY(0);
         }
-        if(v.getY()<0){
+        if (v.getY() < 0) {
             v.setY(this.height);
         }
     }
@@ -167,8 +169,8 @@ public class Physics {
     }
 
     /**
-     * Calculates the change to VelX and VelY depending on the inverse of 
-     * the shapes facing direction.
+     * Calculates the change to VelX and VelY depending on the inverse of the
+     * shapes facing direction.
      *
      * @param v
      */
@@ -178,8 +180,8 @@ public class Physics {
     }
 
     /**
-     * Creates a laser at the ships position, giving it its direction
-     * according to the ships facing direction.
+     * Creates a laser at the ships position, giving it its direction according
+     * to the ships facing direction.
      */
     public void shoot() {
         Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
@@ -209,5 +211,4 @@ public class Physics {
     public int getWidth() {
         return width;
     }
-
 }

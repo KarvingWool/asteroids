@@ -12,7 +12,6 @@ public class AsteroidTest {
 
     @Before
     public void before() {
-        a = new Asteroid();
     }
 
     public AsteroidTest() {
@@ -20,28 +19,29 @@ public class AsteroidTest {
 
     @Test
     public void testAsteroidRotationVel() {
-
+        a = new Asteroid();
         if (a.getRotationVel() < 0 || a.getRotationVel() > 5) {
             assertTrue(false);
         }
     }
 
- 
- //   @Test
- //   public void testAsteroidStartingPostion() {
-  //      Physics p = new Physics(400, 200);
-   //     p.setup();
+    @Test
+    public void testAsteroidStartingPostion() {
+        Physics p = new Physics(400, 200);
+        p.setup();
 
-   //     int i = 0;
-     //   for (Asteroid ast : p.getAsteroids()) {
-      //      if (Math.abs(ast.getY()) != 100) {
-      //          assertTrue(false);
-     //       }
-     //       if (ast.getX() > 200 || ast.getX() < -200) {
-     //           assertTrue(false);
-     //       }
-     //   }
+        int i = 0;
+        for (Asteroid ast : p.getAsteroids()) {
+            
+            if (ast.getY() != 0){
+                if(ast.getY() != p.getHeight()){
+                    assertTrue(false);
+                }
+            }
+            if (ast.getX() > p.getWidth() || ast.getX() < 0) {
+                assertTrue(false);
+            }
+        }
 
- //   }
- 
+    }
 }

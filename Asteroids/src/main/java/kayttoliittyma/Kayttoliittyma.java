@@ -37,6 +37,9 @@ public class Kayttoliittyma {
         bResponse = new ButtonResponse(p);
     }
 
+    /**
+     * Sets up the JFrame and the canvas which will be drawn on.
+     */
     public void setup() {
         frame = new JFrame("Asteroids");
         frame.setIgnoreRepaint(true);
@@ -51,25 +54,29 @@ public class Kayttoliittyma {
         frame.setVisible(true);
 
         canvas.createBufferStrategy(2);
-        BufferStrategy buffer = canvas.getBufferStrategy();
+        buffer = canvas.getBufferStrategy();
 
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-        GraphicsConfiguration gc = gd.getDefaultConfiguration();
+        ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        gd = ge.getDefaultScreenDevice();
+        gc = gd.getDefaultConfiguration();
 
-        BufferedImage bi = gc.createCompatibleImage(p.getWidth(), p.getHeight());
+        bi = gc.createCompatibleImage(p.getWidth(), p.getHeight());
 
-        Graphics graphics = null;
-        Graphics2D g2d = null;
-        Color background = Color.BLACK;
+        graphics = null;
+        g2d = null;
+        background = Color.BLACK;
 
-        int fps = 0;
-        int frames = 0;
-        long totalTime = 0;
-        long curTime = System.currentTimeMillis();
-        long lastTime = curTime;
+        fps = 0;
+        frames = 0;
+        totalTime = 0;
+        curTime = System.currentTimeMillis();
+        lastTime = curTime;
     }
 
+    /**
+     * Renders the JFrame with canvas once, with Asteroids, lasers
+     * and the ship all implemented.
+     */
     public void render() {
 
         try {
@@ -93,21 +100,21 @@ public class Kayttoliittyma {
             g2d.setColor(background);
 
             g2d.fillRect(0, 0, 399, 199);
-            
+
             g2d.setColor(Color.DARK_GRAY);
 
             for (Asteroid a : p.getAsteroids()) {
-                g2d.fillOval((int)a.getX(), (int)a.getY(), a.getWidth(), a.getHeight());
+                g2d.fillOval((int) a.getX(), (int) a.getY(), a.getWidth(), a.getHeight());
             }
-            
+
             g2d.setColor(Color.CYAN);
-            for(Laser l : p.getLasers()){
-                g2d.fillRect((int)l.getX(), (int)l.getY(), l.getWidth(), l.getHeight());
+            for (Laser l : p.getLasers()) {
+                g2d.fillRect((int) l.getX(), (int) l.getY(), l.getWidth(), l.getHeight());
             }
-            
+
             g2d.setColor(Color.GREEN);
-            g2d.fillRect((int)p.getShip().getX(), (int)p.getShip().getY(), p.getShip().getWidth(), p.getShip().getHeight());
-            
+            g2d.fillRect((int) p.getShip().getX(), (int) p.getShip().getY(), p.getShip().getWidth(), p.getShip().getHeight());
+
             g2d.setFont(new Font("Courier New", Font.PLAIN, 12));
 
             g2d.drawString(String.format("FPS: %s", fps), 20, 20);
@@ -136,5 +143,4 @@ public class Kayttoliittyma {
     public JFrame getFrame() {
         return frame;
     }
-
 }
