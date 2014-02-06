@@ -1,13 +1,13 @@
 
 package kayttoliittyma;
 
-import asteroids.asteroids.Physics;
+import sovelluslogiikka.Physics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class buttonResponse implements KeyListener{
+public class ButtonResponse implements KeyListener{
     Physics p;
-    public buttonResponse(Physics p){
+    public ButtonResponse(Physics p){
         this.p = p;
     }
     

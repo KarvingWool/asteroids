@@ -1,5 +1,7 @@
-package raw;
+package sovelluslogiikka;
 
+import sovelluslogiikka.Ship;
+import sovelluslogiikka.Asteroid;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;

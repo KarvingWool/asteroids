@@ -1,5 +1,6 @@
-package raw;
+package sovelluslogiikka;
 
+import sovelluslogiikka.Asteroid;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,13 +27,10 @@ public class AsteroidTest {
     
     @Test
     public void testAsteroidStartingPostion(){
-        ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
-        for(int i=0;i<10;i++){
-            asteroids.add(new Asteroid());
-        }
+        Physics p = new Physics(400, 200);
 
         int i=0;
-        for(Asteroid ast : asteroids){
+        for(Asteroid ast : p.getAsteroids()){
             if(Math.abs(ast.getY())!=100){
                 assertTrue(false);
             }

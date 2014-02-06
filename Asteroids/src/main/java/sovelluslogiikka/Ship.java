@@ -1,8 +1,14 @@
-package raw;
+package sovelluslogiikka;
 
 import java.awt.Rectangle;
 
 public class Ship extends VectorShape {
+
+        public Ship() {
+        super();
+        super.setHeight(16);
+        super.setWidth(16);
+    }
 
     public boolean collision(Asteroid a) {
 
@@ -30,7 +36,7 @@ public class Ship extends VectorShape {
 
     public Rectangle getBounds() {
         Rectangle r;
-        r = new Rectangle((int) getX() - 6, (int) getY() - 6, 6, 6);
+        r = new Rectangle((int) getX() - (super.getWidth() / 2), (int) getY() - (super.getHeight() / 2), super.getWidth(), super.getHeight());
         return r;
     }
 }

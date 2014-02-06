@@ -1,33 +1,57 @@
-package asteroids.asteroids;
+package sovelluslogiikka;
 
+import grafiikka.DrawingBoard;
 import java.util.ArrayList;
-import raw.Asteroid;
-import raw.Laser;
-import raw.Ship;
-import raw.VectorShape;
+import java.util.Random;
 
 public class Physics {
 
     private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
     private ArrayList<Laser> lasers = new ArrayList<Laser>();
+    private Random random = new Random();
     private Ship ship;
+    private int height;
+    private int width;
+    private DrawingBoard d;
 
-    public Physics() {
+    public Physics(int width, int height) {
+        this.height = height;
+        this.width = width;
         this.ship = new Ship();
         for (int i = 0; i < 20; i++) {
             Asteroid a = new Asteroid();
+            asteroidStartingPoint(a);
             asteroids.add(a);
         }
     }
 
+    public void asteroidStartingPoint(Asteroid a) {
+        a.setX(random.nextInt(width) - (width / 2));
+        if (random.nextBoolean()) {
+            a.setVelX(-1 - random.nextInt(3));
+        } else {
+            a.setVelX(random.nextInt(3) + 1);
+        }
+        
+        if (random.nextBoolean()) {
+            a.setY(height / 2);
+            a.setVelY(-1 - random.nextInt(3));
+        } else {
+            a.setY(0 - (height / 2));
+            a.setVelY(1 + random.nextInt(3));
+        }
+
+
+    }
+
     public void game() {
-        int i  =0;
+        int i = 0;
         while (ship.getAlive()) {
             roundOfMovement();
             collisionCount();
             deadRemoval();
-            i++;
-            System.out.println(i);
+            d.repaint();
+            
         }
         System.out.println("Game over");
     }
@@ -93,20 +117,20 @@ public class Physics {
     }
 
     public void accelerate(VectorShape v) {
-        v.setVelY(v.getVelY()+Math.sin(Math.toRadians(v.getFaceDir())));
-        v.setVelX(v.getVelX()-Math.cos(Math.toRadians(v.getFaceDir())));
+        v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir())));
+        v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir())));
     }
-    
-    public void decelerate(VectorShape v){
-        v.setVelY(v.getVelY()+Math.sin(Math.toRadians(v.getFaceDir()+180)));
-        v.setVelX(v.getVelX()-Math.cos(Math.toRadians(v.getFaceDir()+180)));
+
+    public void decelerate(VectorShape v) {
+        v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir() + 180)));
+        v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir() + 180)));
     }
 
     public void shoot() {
         Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
         lasers.add(l);
-        
-        while((l.getVelX()*l.getVelX()+(l.getVelY()*l.getVelY()))<100){
+
+        while ((l.getVelX() * l.getVelX() + (l.getVelY() * l.getVelY())) < 100) {
             accelerate(l);
         }
     }
@@ -122,4 +146,14 @@ public class Physics {
     public Ship getShip() {
         return ship;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+    
+    
 }

@@ -1,6 +1,8 @@
-package raw;
+package sovelluslogiikka;
 
-import asteroids.asteroids.Physics;
+import sovelluslogiikka.Laser;
+import sovelluslogiikka.Asteroid;
+import sovelluslogiikka.Physics;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -16,7 +18,7 @@ public class LaserTest {
 
     @Test
     public void testLaserStartingAtributesThroughShoot() {
-        Physics p = new Physics();
+        Physics p = new Physics(400, 200);
         
         p.getShip().setX(20);
         p.getShip().setY(-15);

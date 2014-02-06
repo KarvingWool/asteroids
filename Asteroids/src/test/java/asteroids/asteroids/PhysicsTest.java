@@ -1,8 +1,9 @@
 package asteroids.asteroids;
 
+import sovelluslogiikka.Physics;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import raw.Asteroid;
+import sovelluslogiikka.Asteroid;
 import org.junit.Before;
 
 public class PhysicsTest {
@@ -10,7 +11,7 @@ public class PhysicsTest {
     
     @Before
     public void before(){
-        p = new Physics();
+        p = new Physics(400, 200);
     }
 
     @Test

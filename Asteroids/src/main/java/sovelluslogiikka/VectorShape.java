@@ -1,4 +1,4 @@
-package raw;
+package sovelluslogiikka;
 
 public class VectorShape {
 
@@ -6,6 +6,8 @@ public class VectorShape {
     private double velX, velY;
     private double faceDir;
     private boolean alive;
+    private int width;
+    private int height;
 
     public VectorShape() {
         setX(0.0);
@@ -15,6 +17,24 @@ public class VectorShape {
 
         setFaceDir(90.0);
         setAlive(true);
+    }
+
+    
+    
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
 
