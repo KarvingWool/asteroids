@@ -1,9 +1,11 @@
 package sovelluslogiikka;
 
-import grafiikka.DrawingBoard;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Handles the physics and running of the game.
+ */
 public class Physics {
 
     private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
@@ -12,35 +14,52 @@ public class Physics {
     private Ship ship;
     private int height;
     private int width;
-    private DrawingBoard d;
 
+    /**
+     * Sets the height and width limits to the given parameters. Creates one
+     * ship and 20 asteroids, giving the asteroids random starting positions.
+     *
+     * @param width
+     * @param height
+     */
     public Physics(int width, int height) {
         this.height = height;
         this.width = width;
         this.ship = new Ship();
         for (int i = 0; i < 20; i++) {
             Asteroid a = new Asteroid();
-            asteroidStartingPoint(a);
             asteroids.add(a);
         }
     }
+    
+    public void setup(){
+        for(Asteroid a : asteroids){
+            asteroidStartingPoint(a);
+            ship.setX(width/2);
+            ship.setY(height/2);
+        }
+    }
 
+    /**
+     * Gives asteroid a its starting position.
+     *
+     * @param a
+     */
     public void asteroidStartingPoint(Asteroid a) {
-        a.setX(random.nextInt(width) - (width / 2));
+        a.setX(random.nextInt(width));
         if (random.nextBoolean()) {
             a.setVelX(-1 - random.nextInt(3));
         } else {
             a.setVelX(random.nextInt(3) + 1);
         }
-        
+
         if (random.nextBoolean()) {
-            a.setY(height / 2);
+            a.setY(height);
             a.setVelY(-1 - random.nextInt(3));
         } else {
-            a.setY(0 - (height / 2));
+            a.setY(0);
             a.setVelY(1 + random.nextInt(3));
         }
-
 
     }
 
@@ -50,12 +69,15 @@ public class Physics {
             roundOfMovement();
             collisionCount();
             deadRemoval();
-            d.repaint();
-            
+
         }
         System.out.println("Game over");
     }
 
+    /**
+     * Tests for collisions between the ship and all asteroids, and between all
+     * lasers and asteroids.
+     */
     public void collisionCount() {
         for (Asteroid a : asteroids) {
             if (ship.collision(a)) {
@@ -71,6 +93,10 @@ public class Physics {
         }
     }
 
+    /**
+     * Removes all lasers and asteroids from their corresponding arrays, given
+     * if their alive status is false;
+     */
     public void deadRemoval() {
         ArrayList<Integer> dead = new ArrayList<Integer>();
         int i = 0;
@@ -114,18 +140,47 @@ public class Physics {
     public void movement(VectorShape v) {
         v.setX(v.getX() + v.getVelX());
         v.setY(v.getY() + v.getVelY());
+        
+        if(v.getX()>this.width){
+            v.setX(0);
+        }
+        if(v.getX()<0){
+            v.setX(width);
+        }
+        if(v.getY()>this.height){
+            v.setY(0);
+        }
+        if(v.getY()<0){
+            v.setY(this.height);
+        }
     }
 
+    /**
+     * Calculates the change to VelX and VelY depending on the shapes facing
+     * direction.
+     *
+     * @param v
+     */
     public void accelerate(VectorShape v) {
         v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir())));
         v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir())));
     }
 
+    /**
+     * Calculates the change to VelX and VelY depending on the inverse of 
+     * the shapes facing direction.
+     *
+     * @param v
+     */
     public void decelerate(VectorShape v) {
         v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir() + 180)));
         v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir() + 180)));
     }
 
+    /**
+     * Creates a laser at the ships position, giving it its direction
+     * according to the ships facing direction.
+     */
     public void shoot() {
         Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
         lasers.add(l);
@@ -154,6 +209,5 @@ public class Physics {
     public int getWidth() {
         return width;
     }
-    
-    
+
 }

@@ -1,5 +1,10 @@
 package sovelluslogiikka;
 
+/** Parameters and methods of the VectorShape class.
+* Its contents are extended into the Asteroid, 
+* Laser and Ship classes.
+*/
+
 public class VectorShape {
 
     private double x, y;
@@ -46,6 +51,10 @@ public class VectorShape {
         this.velY = velocityY;
     }
 
+    /** Sets the faceing direction to faceDir,
+     * as long as the parameter is between 0-359.
+     * @param faceDir 
+     */
     public void setFaceDir(double faceDir) {
         if(faceDir>-1&&faceDir<360){
             this.faceDir=faceDir;

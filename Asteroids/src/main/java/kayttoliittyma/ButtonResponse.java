@@ -1,6 +1,8 @@
-
 package kayttoliittyma;
 
+/** A KeyListener class, which defines functions for certain
+ * KeyEvents.
+ */
 import sovelluslogiikka.Physics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,6 +13,10 @@ public class ButtonResponse implements KeyListener{
         this.p = p;
     }
     
+    /** Gives the appropriate functions to the keys
+     * up, down, left, right and space.
+     * @param e 
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP){
@@ -32,11 +38,10 @@ public class ButtonResponse implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+  
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
