@@ -39,3 +39,6 @@ Backround koko tehty vaihdettavaksi, asteroid alkupaikan generointi muutettu Phy
 
 06.02.2014 11:30 - 16:00
 DrawingBoard poistettu. Javadoc luonti kaikille luokille sekä suurimmalle osalle metodeista. Kayttoliittymälle tehty luokat setup ja render. Game luokan luonti, ja game metodin poisto.
+
+06.02.2014 21:00 - 23:00
+Sekvenssikaavioiden teko. Luokkakaavion muokkaus.
