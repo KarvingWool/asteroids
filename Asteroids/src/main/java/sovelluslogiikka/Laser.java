@@ -18,6 +18,7 @@ public class Laser extends VectorShape {
         super.setX(x);
         super.setY(y);
         super.setFaceDir(dir);
+        super.setShape(new Rectangle(0, 0, 1, 1));
         super.setWidth(1);
         super.setHeight(1);
 

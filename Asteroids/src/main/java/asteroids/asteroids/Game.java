@@ -22,7 +22,6 @@ public class Game extends JFrame {
 
     private Physics p;
     private Kayttoliittyma k;
-    private JFrame frame;
 
 
     public Game(Physics p, Kayttoliittyma k) {
@@ -36,6 +35,11 @@ public class Game extends JFrame {
         
         while(p.getShip().getAlive()){
             k.render();
+            try{
+                Thread.sleep(40);
+            } catch (Exception e) {
+                
+            }
             p.roundOfMovement();
             p.collisionCount();
             p.deadRemoval();

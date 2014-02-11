@@ -1,6 +1,7 @@
 package kayttoliittyma;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -13,6 +14,7 @@ import sovelluslogiikka.*;
  */
 public class Kayttoliittyma {
 
+    private AffineTransform identity = new AffineTransform();
     private JFrame frame;
     private Physics p;
     private ButtonResponse bResponse;
@@ -71,56 +73,39 @@ public class Kayttoliittyma {
         totalTime = 0;
         curTime = System.currentTimeMillis();
         lastTime = curTime;
+        frame.addKeyListener(bResponse);
     }
 
     /**
-     * Renders the JFrame with canvas once, with Asteroids, lasers
-     * and the ship all implemented.
+     * Renders the JFrame with canvas once, with Asteroids, lasers and the ship
+     * all implemented.
      */
     public void render() {
 
         try {
-
             lastTime = curTime;
             curTime = System.currentTimeMillis();
             totalTime += curTime - lastTime;
-
             if (totalTime > 1000) {
-
                 totalTime -= 1000;
-
                 fps = frames;
-
                 frames = 0;
             }
             frames++;
 
             g2d = bi.createGraphics();
-
             g2d.setColor(background);
-
-            g2d.fillRect(0, 0, 399, 199);
-
-            g2d.setColor(Color.DARK_GRAY);
-
-            for (Asteroid a : p.getAsteroids()) {
-                g2d.fillOval((int) a.getX(), (int) a.getY(), a.getWidth(), a.getHeight());
-            }
+            g2d.fillRect(0, 0, p.getWidth(), p.getHeight());
 
             g2d.setColor(Color.CYAN);
-            for (Laser l : p.getLasers()) {
-                g2d.fillRect((int) l.getX(), (int) l.getY(), l.getWidth(), l.getHeight());
-            }
-
-            g2d.setColor(Color.GREEN);
-            g2d.fillRect((int) p.getShip().getX(), (int) p.getShip().getY(), p.getShip().getWidth(), p.getShip().getHeight());
-
             g2d.setFont(new Font("Courier New", Font.PLAIN, 12));
-
             g2d.drawString(String.format("FPS: %s", fps), 20, 20);
 
-            graphics = buffer.getDrawGraphics();
+            drawLasers();
+            drawAsteroids();
+            drawShip();
 
+            graphics = buffer.getDrawGraphics();
             graphics.drawImage(bi, 0, 0, null);
 
             if (!buffer.contentsLost()) {
@@ -138,6 +123,42 @@ public class Kayttoliittyma {
             }
         }
 
+    }
+
+    /**
+     * Draws the ship.
+     */
+    public void drawShip() {
+        g2d.setTransform(identity);
+        g2d.translate(p.getShip().getX(), p.getShip().getY());
+        g2d.rotate(Math.toRadians(p.getShip().getFaceDir()+180));
+        g2d.setColor(Color.ORANGE);
+        g2d.fill(p.getShip().getShape());
+    }
+
+    /**
+     * Draws all the asteroids.
+     */
+    public void drawAsteroids() {
+
+        for (Asteroid a : p.getAsteroids()) {
+            g2d.setTransform(identity);
+            g2d.translate(a.getX(), a.getY());
+            g2d.setColor(Color.DARK_GRAY);
+            g2d.fill(a.getShape());
+        }
+    }
+
+    /**
+     * Draws all the lasers.
+     */
+    public void drawLasers() {
+        for (Laser l : p.getLasers()) {
+            g2d.setTransform(identity);
+            g2d.translate(l.getX(), l.getY());
+            g2d.setColor(Color.MAGENTA);
+            g2d.fill(l.getShape());
+        }
     }
 
     public JFrame getFrame() {

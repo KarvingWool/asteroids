@@ -26,10 +26,10 @@ public class ButtonResponse implements KeyListener{
             p.decelerate(p.getShip());
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            p.getShip().turnLeft();
+            p.getShip().turnAntiClockwise();
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            p.getShip().turnRight();
+            p.getShip().turnClockwise();
         }
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
             p.shoot();

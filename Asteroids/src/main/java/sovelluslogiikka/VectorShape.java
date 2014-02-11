@@ -1,5 +1,7 @@
 package sovelluslogiikka;
 
+import java.awt.Shape;
+
 /** Parameters and methods of the VectorShape class.
 * Its contents are extended into the Asteroid, 
 * Laser and Ship classes.
@@ -13,6 +15,7 @@ public class VectorShape {
     private boolean alive;
     private int width;
     private int height;
+    private Shape shape;
 
     public VectorShape() {
         setX(0.0);
@@ -24,7 +27,10 @@ public class VectorShape {
         setAlive(true);
     }
 
-    
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
     
     public void setWidth(int width) {
         this.width = width;
@@ -51,7 +57,7 @@ public class VectorShape {
         this.velY = velocityY;
     }
 
-    /** Sets the faceing direction to faceDir,
+    /** Sets the facing direction to faceDir,
      * as long as the parameter is between 0-359.
      * @param faceDir 
      */
@@ -73,6 +79,11 @@ public class VectorShape {
         this.y = y;
     }
 
+    public Shape getShape() {
+        return shape;
+    }
+
+    
     public double getVelX() {
         return velX;
     }

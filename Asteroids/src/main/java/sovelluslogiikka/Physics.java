@@ -26,7 +26,7 @@ public class Physics {
         this.height = height;
         this.width = width;
         this.ship = new Ship();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 2; i++) {
             Asteroid a = new Asteroid();
             asteroids.add(a);
         }
@@ -50,17 +50,17 @@ public class Physics {
     public void asteroidStartingPoint(Asteroid a) {
         a.setX(random.nextInt(width));
         if (random.nextBoolean()) {
-            a.setVelX(-1 - random.nextInt(3));
+            a.setVelX(-1 - random.nextInt(2));
         } else {
-            a.setVelX(random.nextInt(3) + 1);
+            a.setVelX(random.nextInt(2) + 1);
         }
 
         if (random.nextBoolean()) {
             a.setY(height);
-            a.setVelY(-1 - random.nextInt(3));
+            a.setVelY(-1 - random.nextInt(2));
         } else {
             a.setY(0);
-            a.setVelY(1 + random.nextInt(3));
+            a.setVelY(1 + random.nextInt(2));
         }
 
     }
