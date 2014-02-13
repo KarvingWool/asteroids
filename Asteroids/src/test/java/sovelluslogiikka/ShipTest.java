@@ -44,13 +44,13 @@ public class ShipTest {
     @Test
     public void testShipTurning() {
         
-        for(int i=0;i<125;i++){
-            s.turnLeft();
+        for(int i=0;i<9;i++){
+            s.turnClockwise();
         }
-        assertEquals(325, s.getFaceDir(), 0.01);
+        assertEquals(0, s.getFaceDir(), 0.01);
         
-        for(int i=0;i<45;i++){
-            s.turnRight();
+        for(int i=0;i<37;i++){
+            s.turnAntiClockwise();
         }
         assertEquals(10, s.getFaceDir(), 0.01);
     }

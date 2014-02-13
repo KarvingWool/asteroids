@@ -1,10 +1,13 @@
 package kayttoliittyma;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import sovelluslogiikka.*;
@@ -74,6 +77,8 @@ public class Kayttoliittyma {
         curTime = System.currentTimeMillis();
         lastTime = curTime;
         frame.addKeyListener(bResponse);
+        JButton button = new JButton("Start");
+        frame.add(button);
     }
 
     /**
@@ -131,7 +136,7 @@ public class Kayttoliittyma {
     public void drawShip() {
         g2d.setTransform(identity);
         g2d.translate(p.getShip().getX(), p.getShip().getY());
-        g2d.rotate(Math.toRadians(p.getShip().getFaceDir()+180));
+        g2d.rotate(Math.toRadians(0 - p.getShip().getFaceDir() + 90));
         g2d.setColor(Color.ORANGE);
         g2d.fill(p.getShip().getShape());
     }

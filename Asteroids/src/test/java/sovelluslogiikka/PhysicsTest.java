@@ -12,7 +12,7 @@ public class PhysicsTest {
 
     @Before
     public void before() {
-        p = new Physics(400, 200);
+        p = new Physics(400, 200, 20);
     }
 
     @Test
@@ -24,7 +24,7 @@ public class PhysicsTest {
 
     @Test
     public void testCollisionCount() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < p.getAsteroidAmount(); i++) {
             p.getAsteroids().get(i).setX(0);
             p.getAsteroids().get(i).setY(0);
             p.shoot();

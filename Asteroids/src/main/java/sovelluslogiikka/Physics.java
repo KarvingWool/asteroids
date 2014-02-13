@@ -14,6 +14,7 @@ public class Physics {
     private Ship ship;
     private int height;
     private int width;
+    private int asteroidAmount;
 
     /**
      * Sets the height and width limits to the given parameters. Creates one
@@ -22,11 +23,12 @@ public class Physics {
      * @param width
      * @param height
      */
-    public Physics(int width, int height) {
+    public Physics(int width, int height, int asteroidAmount) {
+        this.asteroidAmount = asteroidAmount;
         this.height = height;
         this.width = width;
         this.ship = new Ship();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < asteroidAmount; i++) {
             Asteroid a = new Asteroid();
             asteroids.add(a);
         }
@@ -155,6 +157,13 @@ public class Physics {
         if (v.getY() < 0) {
             v.setY(this.height);
         }
+        
+        if(v.getClass()==new Laser(0,0,0).getClass()){
+            v.setCounter(v.getCounter()+1);
+            if(v.getCounter()>30){
+                v.setAlive(false);
+            }
+        }
     }
 
     /**
@@ -190,6 +199,8 @@ public class Physics {
         while ((l.getVelX() * l.getVelX() + (l.getVelY() * l.getVelY())) < 100) {
             accelerate(l);
         }
+        l.setVelX(l.getVelX()+getShip().getVelX());
+        l.setVelY(l.getVelY()+getShip().getVelY());
     }
 
     public ArrayList<Asteroid> getAsteroids() {
@@ -211,4 +222,10 @@ public class Physics {
     public int getWidth() {
         return width;
     }
+
+    public int getAsteroidAmount() {
+        return asteroidAmount;
+    }
+    
+    
 }

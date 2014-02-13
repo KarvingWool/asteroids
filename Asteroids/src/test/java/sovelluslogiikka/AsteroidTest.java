@@ -27,7 +27,7 @@ public class AsteroidTest {
 
     @Test
     public void testAsteroidStartingPostion() {
-        Physics p = new Physics(400, 200);
+        Physics p = new Physics(400, 200, 20);
         p.setup();
 
         int i = 0;

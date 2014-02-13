@@ -2,13 +2,13 @@ package sovelluslogiikka;
 
 import java.awt.Shape;
 
-/** Parameters and methods of the VectorShape class.
-* Its contents are extended into the Asteroid, 
-* Laser and Ship classes.
-*/
-
+/**
+ * Parameters and methods of the VectorShape class. Its contents are extended
+ * into the Asteroid, Laser and Ship classes.
+ */
 public class VectorShape {
 
+    private int counter =0;
     private double x, y;
     private double velX, velY;
     private double faceDir;
@@ -31,7 +31,6 @@ public class VectorShape {
         this.shape = shape;
     }
 
-    
     public void setWidth(int width) {
         this.width = width;
     }
@@ -48,7 +47,6 @@ public class VectorShape {
         return height;
     }
 
-
     public void setVelX(double velocityX) {
         this.velX = velocityX;
     }
@@ -57,14 +55,24 @@ public class VectorShape {
         this.velY = velocityY;
     }
 
-    /** Sets the facing direction to faceDir,
-     * as long as the parameter is between 0-359.
-     * @param faceDir 
+    /**
+     * Sets the facing direction in faceDir. Method translates all numbers to between
+     * 0-359 degrees.
+     *
+     * @param faceDir
      */
     public void setFaceDir(double faceDir) {
-        if(faceDir>-1&&faceDir<360){
-            this.faceDir=faceDir;
+        if (faceDir > 359) {
+            while (faceDir > 359) {
+                faceDir = faceDir - 360;
+            }
         }
+        if (faceDir < 0) {
+            while (faceDir < 0) {
+                faceDir = faceDir + 360;
+            }
+        }
+        this.faceDir=faceDir;
     }
 
     public void setAlive(boolean alive) {
@@ -79,11 +87,17 @@ public class VectorShape {
         this.y = y;
     }
 
+     public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
     public Shape getShape() {
         return shape;
     }
 
-    
     public double getVelX() {
         return velX;
     }

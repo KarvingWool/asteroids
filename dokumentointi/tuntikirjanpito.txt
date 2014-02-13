@@ -45,3 +45,6 @@ Sekvenssikaavioiden teko. Luokkakaavion muokkaus.
 
 11.02.2014 22:00 - 00:00
 Thread-sleep added to Game loop. Draw-Asteroids, -Ship, ja -Lasers luokat luotu. FPS hiomista. Shape atribuutin luonti VectorShape luokalle, ja sen implementaatio Polygonin kautta Laser, Asteroid ja Ship luokille.
+
+13.02.2014 17:00 -
+Kuvan ja todellisen faceDir synkronointi. setFaceDir metodi tehty ottamaan vastaan kaikki numerot, ja vaihtamaan 0-359 välille. Counter atribuutti luotu, ja laser objekteille annettu maksimielinaika.

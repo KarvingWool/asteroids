@@ -18,7 +18,7 @@ public class LaserTest {
 
     @Test
     public void testLaserStartingAtributesThroughShoot() {
-        Physics p = new Physics(400, 200);
+        Physics p = new Physics(400, 200, 20);
         
         p.getShip().setX(20);
         p.getShip().setY(-15);

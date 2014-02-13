@@ -31,22 +31,22 @@ public class Ship extends VectorShape {
     /**
      * Shifts the ships facing direction anticlockwise.
      */
-    public void turnAntiClockwise() {
+    public void turnClockwise() {
         if (super.getFaceDir() <= 0) {
             super.setFaceDir(359);
         } else {
-            super.setFaceDir(super.getFaceDir() - 5);
+            super.setFaceDir(super.getFaceDir() - 10);
         }
     }
 
     /**
      * Shifts the ships facing direction clockwise.
      */
-    public void turnClockwise() {
+    public void turnAntiClockwise() {
         if (super.getFaceDir() >= 359) {
             super.setFaceDir(0);
         } else {
-            super.setFaceDir(super.getFaceDir() + 5);
+            super.setFaceDir(super.getFaceDir() + 10);
         }
     }
 

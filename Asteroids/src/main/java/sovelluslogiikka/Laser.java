@@ -45,4 +45,5 @@ public class Laser extends VectorShape {
         r = new Rectangle((int) getX() - (super.getWidth() / 2), (int) getY() - (super.getHeight() / 2), super.getWidth(), super.getHeight());
         return r;
     }
+    
 }
