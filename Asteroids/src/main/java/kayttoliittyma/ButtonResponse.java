@@ -3,6 +3,8 @@ package kayttoliittyma;
 /** A KeyListener class, which defines functions for certain
  * KeyEvents.
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import sovelluslogiikka.Physics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

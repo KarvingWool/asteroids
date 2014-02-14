@@ -1,7 +1,5 @@
 package sovelluslogiikka;
 
-import sovelluslogiikka.Asteroid;
-import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -14,8 +12,6 @@ public class AsteroidTest {
     public void before() {
     }
 
-    public AsteroidTest() {
-    }
 
     @Test
     public void testAsteroidRotationVel() {
@@ -28,8 +24,6 @@ public class AsteroidTest {
     @Test
     public void testAsteroidStartingPostion() {
         Physics p = new Physics(400, 200, 20);
-        p.setup();
-
         int i = 0;
         for (Asteroid ast : p.getAsteroids()) {
             

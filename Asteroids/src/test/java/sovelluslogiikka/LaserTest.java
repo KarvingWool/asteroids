@@ -1,8 +1,5 @@
 package sovelluslogiikka;
 
-import sovelluslogiikka.Laser;
-import sovelluslogiikka.Asteroid;
-import sovelluslogiikka.Physics;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -46,5 +43,20 @@ public class LaserTest {
 
         l.setX(-45);
         assertFalse(l.collision(a));
+    }
+    
+    @Test
+    public void testLaserLifetimeCounter(){
+        Physics p = new Physics(400, 200, 20);
+        for(Asteroid a : p.getAsteroids()){
+            a.setAlive(false);
+        }
+        l.setVelX(5);
+        for(int i=0;i<30;i++){
+            p.movement(l);
+        }
+        assertTrue(l.getAlive());
+        p.movement(l);
+        assertFalse(l.getAlive());
     }
 }

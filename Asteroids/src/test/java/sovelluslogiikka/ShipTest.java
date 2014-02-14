@@ -42,17 +42,17 @@ public class ShipTest {
     }
 
     @Test
-    public void testShipTurning() {
+    public void testTurnClockwise() {
         
-        for(int i=0;i<9;i++){
+        for(int i=0;i<6;i++){
             s.turnClockwise();
         }
-        assertEquals(0, s.getFaceDir(), 0.01);
+        assertEquals(330, s.getFaceDir(), 0.01);
         
-        for(int i=0;i<37;i++){
+        for(int i=0;i<3;i++){
             s.turnAntiClockwise();
         }
-        assertEquals(10, s.getFaceDir(), 0.01);
+        assertEquals(30, s.getFaceDir(), 0.01);
     }
     
 }

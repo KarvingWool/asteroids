@@ -46,5 +46,8 @@ Sekvenssikaavioiden teko. Luokkakaavion muokkaus.
 11.02.2014 22:00 - 00:00
 Thread-sleep added to Game loop. Draw-Asteroids, -Ship, ja -Lasers luokat luotu. FPS hiomista. Shape atribuutin luonti VectorShape luokalle, ja sen implementaatio Polygonin kautta Laser, Asteroid ja Ship luokille.
 
-13.02.2014 17:00 -
+13.02.2014 17:00 - 19:00
 Kuvan ja todellisen faceDir synkronointi. setFaceDir metodi tehty ottamaan vastaan kaikki numerot, ja vaihtamaan 0-359 v‰lille. Counter atribuutti luotu, ja laser objekteille annettu maksimielinaika.
+
+13.02.2014 21:00 - 04:20
+Sekvenssikaavioita 2 kappaletta. Testit wrap aroundille movementissa tehty. Yrityst‰ saada startup screen toimimaan, ei onnistunut. Testejen hienos‰‰tˆ‰, ja paloittelua pienemmiksi osiksi. Collision v‰ltt‰minen jos yksi osapuoli getAlive == false testattu. Counter atribuutti ja elinaika Laserille testattu. Fixed concurrent modification exception in method shoot(). Made it possible to input amount of asteroids before the round. Asteroid luonti siirretty omaan metodiinsa. GameLoop nyt lis‰‰ asteroideja kun kaikki muut ovat tuhottu. Yritin noin 4 tuntia saada Start menua toimimaan, en onnistunut. Hieman ‰rsytt‰‰.

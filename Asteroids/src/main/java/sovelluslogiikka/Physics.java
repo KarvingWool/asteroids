@@ -1,5 +1,6 @@
 package sovelluslogiikka;
 
+import asteroids.asteroids.Game;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +16,9 @@ public class Physics {
     private int height;
     private int width;
     private int asteroidAmount;
+    private boolean levelup = false;
+    private int score = 0;
+    private Game g;
 
     /**
      * Sets the height and width limits to the given parameters. Creates one
@@ -28,20 +32,18 @@ public class Physics {
         this.height = height;
         this.width = width;
         this.ship = new Ship();
-        for (int i = 0; i < asteroidAmount; i++) {
-            Asteroid a = new Asteroid();
-            asteroids.add(a);
-        }
+        setupShip();
+        spawnAsteroids();
+
     }
+
     /**
      * Puts all the asteroids and the ship in their starting position.
      */
-    public void setup() {
+    public void setupShip() {
         ship.setX(width / 2);
         ship.setY(height / 2);
-        for (Asteroid a : asteroids) {
-            asteroidStartingPoint(a);
-        }
+
     }
 
     /**
@@ -49,35 +51,41 @@ public class Physics {
      *
      * @param a
      */
-    public void asteroidStartingPoint(Asteroid a) {
-        a.setX(random.nextInt(width));
-        if (random.nextBoolean()) {
-            a.setVelX(-1 - random.nextInt(2));
-        } else {
-            a.setVelX(random.nextInt(2) + 1);
-        }
+    public void spawnAsteroids() {
+        for (int i = 0; i < asteroidAmount; i++) {
+            Asteroid a = new Asteroid();
+            asteroids.add(a);
+            a.setX(random.nextInt(width));
 
-        if (random.nextBoolean()) {
-            a.setY(height);
-            a.setVelY(-1 - random.nextInt(2));
-        } else {
-            a.setY(0);
-            a.setVelY(1 + random.nextInt(2));
-        }
+            if (random.nextBoolean()) {
+                a.setVelX(-1 - random.nextInt(2));
+            } else {
+                a.setVelX(random.nextInt(2) + 1);
+            }
 
+            if (random.nextBoolean()) {
+                a.setY(height);
+                a.setVelY(-1 - random.nextInt(2));
+            } else {
+                a.setY(0);
+                a.setVelY(1 + random.nextInt(2));
+            }
+        }
     }
 
     /**
      * Tests for collisions between the ship and all asteroids, and between all
-     * lasers and asteroids.
+     * lasers and asteroids. With a collision, alive is set to false, and in case
+     * of destroyed asteroids, the score is raised.
      */
     public void collisionCount() {
         for (Asteroid a : asteroids) {
-            if (ship.collision(a)) {
+            if (ship.collision(a) && a.getAlive()) {
                 ship.setAlive(false);
             }
             for (Laser l : lasers) {
                 if (l.collision(a) && l.getAlive() && a.getAlive()) {
+                    score=score+(asteroidAmount/10);
                     l.setAlive(false);
                     a.setAlive(false);
                 }
@@ -114,15 +122,17 @@ public class Physics {
             i++;
         }
         i = 0;
-        for (int d : dead) {
-            lasers.remove(d - i);
-            i++;
+        try {
+            for (int d : dead) {
+                lasers.remove(d - i);
+                i++;
+            }
+        } catch (Exception e) {
         }
     }
 
     /**
-     * Applys the method movement to every VectorShape
-     * still present.
+     * Applys the method movement to every VectorShape still present.
      */
     public void roundOfMovement() {
         movement(ship);
@@ -135,11 +145,11 @@ public class Physics {
     }
 
     /**
-     * Adds the velX and velY of parameter v, to x and y
-     * respectively. If the new x or y were to be out of bounds,
-     * the method wraps the x or y to the opposite side of the
-     * field.
-     * @param v 
+     * Adds the velX and velY of parameter v, to x and y respectively. If the
+     * new x or y were to be out of bounds, the method wraps the x or y to the
+     * opposite side of the field.
+     *
+     * @param v
      */
     public void movement(VectorShape v) {
         v.setX(v.getX() + v.getVelX());
@@ -157,10 +167,10 @@ public class Physics {
         if (v.getY() < 0) {
             v.setY(this.height);
         }
-        
-        if(v.getClass()==new Laser(0,0,0).getClass()){
-            v.setCounter(v.getCounter()+1);
-            if(v.getCounter()>30){
+
+        if (v.getClass() == new Laser(0, 0, 0).getClass()) {
+            v.setCounter(v.getCounter() + 1);
+            if (v.getCounter() > 30) {
                 v.setAlive(false);
             }
         }
@@ -199,8 +209,8 @@ public class Physics {
         while ((l.getVelX() * l.getVelX() + (l.getVelY() * l.getVelY())) < 100) {
             accelerate(l);
         }
-        l.setVelX(l.getVelX()+getShip().getVelX());
-        l.setVelY(l.getVelY()+getShip().getVelY());
+        l.setVelX(l.getVelX() + getShip().getVelX());
+        l.setVelY(l.getVelY() + getShip().getVelY());
     }
 
     public ArrayList<Asteroid> getAsteroids() {
@@ -227,5 +237,19 @@ public class Physics {
         return asteroidAmount;
     }
     
-    
+    public int getScore(){
+        return score;
+    }
+
+    public boolean getLevelup() {
+        return levelup;
+    }
+
+    public void setLevelup(boolean levelup) {
+        this.levelup = levelup;
+    }
+
+    public void setAsteroidAmount(int asteroidAmount) {
+        this.asteroidAmount = asteroidAmount;
+    }
 }

@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import sovelluslogiikka.*;
 
@@ -36,12 +38,15 @@ public class Kayttoliittyma {
     private long totalTime;
     private long curTime;
     private long lastTime;
+    private boolean menu = true;
 
     public Kayttoliittyma(Physics p) {
         this.p = p;
         bResponse = new ButtonResponse(p);
     }
 
+    
+    
     /**
      * Sets up the JFrame and the canvas which will be drawn on.
      */
@@ -57,6 +62,7 @@ public class Kayttoliittyma {
         frame.add(canvas);
         frame.pack();
         frame.setVisible(true);
+
 
         canvas.createBufferStrategy(2);
         buffer = canvas.getBufferStrategy();
@@ -77,8 +83,6 @@ public class Kayttoliittyma {
         curTime = System.currentTimeMillis();
         lastTime = curTime;
         frame.addKeyListener(bResponse);
-        JButton button = new JButton("Start");
-        frame.add(button);
     }
 
     /**
@@ -86,7 +90,6 @@ public class Kayttoliittyma {
      * all implemented.
      */
     public void render() {
-
         try {
             lastTime = curTime;
             curTime = System.currentTimeMillis();
@@ -105,6 +108,12 @@ public class Kayttoliittyma {
             g2d.setColor(Color.CYAN);
             g2d.setFont(new Font("Courier New", Font.PLAIN, 12));
             g2d.drawString(String.format("FPS: %s", fps), 20, 20);
+            g2d.drawString(String.format("Score:") + Integer.toString(p.getScore()), 20, 30);
+
+            if (p.getLevelup()) {
+                levelupScreen();
+            }
+
 
             drawLasers();
             drawAsteroids();
@@ -127,7 +136,6 @@ public class Kayttoliittyma {
                 g2d.dispose();
             }
         }
-
     }
 
     /**
@@ -166,7 +174,23 @@ public class Kayttoliittyma {
         }
     }
 
+    public void levelupScreen() {
+        g2d.setColor(Color.RED);
+        g2d.setFont(new Font("Courier New", Font.PLAIN, 30));
+        g2d.drawString(String.format("Get Ready, Spawning more Asteroids"), p.getWidth() / 8, p.getHeight() / 2);
+    }
+
     public JFrame getFrame() {
         return frame;
     }
+
+    public Graphics getGraphics() {
+        return graphics;
+    }
+
+    public void setMenu(boolean menu) {
+        this.menu = menu;
+    }
+    
+    
 }
