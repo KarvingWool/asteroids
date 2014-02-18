@@ -6,29 +6,48 @@ import org.junit.Before;
 
 public class AsteroidTest {
 
-    Asteroid a;
+    Physics p = new Physics(400, 200, 20);
 
     @Before
     public void before() {
     }
 
-
     @Test
-    public void testAsteroidRotationVel() {
-        a = new Asteroid();
-        if (a.getRotationVel() < 0 || a.getRotationVel() > 5) {
-            assertTrue(false);
+    public void testStartingRotationPosition() {
+
+        for (Asteroid a : p.getAsteroids()) {
+            if (a.getRotationPosition() > 360 || a.getRotationPosition() < -1) {
+                assertTrue(false);
+            }
         }
     }
 
     @Test
+    public void testRotationPositionNeverExceedsGivenAmount() {
+
+        for (int i = 0; i < 360; i++) {
+            for (Asteroid a : p.getAsteroids()) {
+                a.getRotationPosition();
+                if (a.getRotationPosition() > 360 || a.getRotationPosition() < -1) {
+                    assertTrue(false);
+                }
+            }
+
+        }
+
+    }
+
+    @Test
     public void testAsteroidStartingPostion() {
-        Physics p = new Physics(400, 200, 20);
         int i = 0;
         for (Asteroid ast : p.getAsteroids()) {
-            
-            if (ast.getY() != 0){
-                if(ast.getY() != p.getHeight()){
+
+            if (ast.getY() < 0 || ast.getY() > p.getHeight()) {
+                assertTrue(false);
+            }
+
+            if (ast.getY() > 20) {
+                if (ast.getY() < p.getHeight() - 20) {
                     assertTrue(false);
                 }
             }

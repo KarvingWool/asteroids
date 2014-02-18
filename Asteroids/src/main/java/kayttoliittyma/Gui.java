@@ -1,35 +1,29 @@
 package kayttoliittyma;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import scores.Highscore;
 import sovelluslogiikka.*;
 
 /**
  * Handles graphics and the Rendering of the canvas.
  */
-public class Kayttoliittyma {
+public class Gui {
 
     private AffineTransform identity = new AffineTransform();
     private JFrame frame;
     private Physics p;
     private ButtonResponse bResponse;
     private Random rand = new Random();
-    private Canvas canvas;
     private BufferStrategy buffer;
-    private BufferedImage bi;
-    private GraphicsEnvironment ge;
-    private GraphicsDevice gd;
-    private GraphicsConfiguration gc;
+    private BufferedImage buffImg;
+    private GraphicsEnvironment grEnv;
+    private GraphicsDevice grDev;
+    private GraphicsConfiguration grConf;
     private Graphics graphics = null;
     private Graphics2D g2d = null;
     private Color background = Color.BLACK;
@@ -38,11 +32,12 @@ public class Kayttoliittyma {
     private long totalTime;
     private long curTime;
     private long lastTime;
-    private boolean menu = true;
+    private Highscore highscore;
 
-    public Kayttoliittyma(Physics p) {
+    public Gui(Physics p, Highscore h) {
+        highscore=h;
         this.p = p;
-        bResponse = new ButtonResponse(p);
+        bResponse = new ButtonResponse(this);
     }
 
     
@@ -67,11 +62,11 @@ public class Kayttoliittyma {
         canvas.createBufferStrategy(2);
         buffer = canvas.getBufferStrategy();
 
-        ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        gd = ge.getDefaultScreenDevice();
-        gc = gd.getDefaultConfiguration();
+        grEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        grDev = grEnv.getDefaultScreenDevice();
+        grConf = grDev.getDefaultConfiguration();
 
-        bi = gc.createCompatibleImage(p.getWidth(), p.getHeight());
+        buffImg = grConf.createCompatibleImage(p.getWidth(), p.getHeight());
 
         graphics = null;
         g2d = null;
@@ -101,7 +96,7 @@ public class Kayttoliittyma {
             }
             frames++;
 
-            g2d = bi.createGraphics();
+            g2d = buffImg.createGraphics();
             g2d.setColor(background);
             g2d.fillRect(0, 0, p.getWidth(), p.getHeight());
 
@@ -109,18 +104,20 @@ public class Kayttoliittyma {
             g2d.setFont(new Font("Courier New", Font.PLAIN, 12));
             g2d.drawString(String.format("FPS: %s", fps), 20, 20);
             g2d.drawString(String.format("Score:") + Integer.toString(p.getScore()), 20, 30);
-
-            if (p.getLevelup()) {
-                levelupScreen();
-            }
+            g2d.drawString(String.format("Highscore:") + highscore.getHighscore(), 20, 40);
+            
 
 
             drawLasers();
             drawAsteroids();
             drawShip();
 
+            if (p.getLevelup()) {
+                levelupScreen();
+            }
+            
             graphics = buffer.getDrawGraphics();
-            graphics.drawImage(bi, 0, 0, null);
+            graphics.drawImage(buffImg, 0, 0, null);
 
             if (!buffer.contentsLost()) {
                 buffer.show();
@@ -157,6 +154,7 @@ public class Kayttoliittyma {
         for (Asteroid a : p.getAsteroids()) {
             g2d.setTransform(identity);
             g2d.translate(a.getX(), a.getY());
+            g2d.rotate(a.getRotationPosition());
             g2d.setColor(Color.DARK_GRAY);
             g2d.fill(a.getShape());
         }
@@ -166,14 +164,17 @@ public class Kayttoliittyma {
      * Draws all the lasers.
      */
     public void drawLasers() {
-        for (Laser l : p.getLasers()) {
+        for (int i=0;i<p.getLasers().size();i++) {
             g2d.setTransform(identity);
-            g2d.translate(l.getX(), l.getY());
+            g2d.translate(p.getLasers().get(i).getX(), p.getLasers().get(i).getY());
             g2d.setColor(Color.MAGENTA);
-            g2d.fill(l.getShape());
+            g2d.fill(p.getLasers().get(i).getShape());
         }
     }
 
+    /**
+     * Draws the level up string onto the canvas.
+     */
     public void levelupScreen() {
         g2d.setColor(Color.RED);
         g2d.setFont(new Font("Courier New", Font.PLAIN, 30));
@@ -188,9 +189,10 @@ public class Kayttoliittyma {
         return graphics;
     }
 
-    public void setMenu(boolean menu) {
-        this.menu = menu;
+    public Physics getPhysics() {
+        return p;
     }
+    
     
     
 }

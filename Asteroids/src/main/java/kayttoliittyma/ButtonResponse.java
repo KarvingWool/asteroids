@@ -10,9 +10,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ButtonResponse implements KeyListener{
-    Physics p;
-    public ButtonResponse(Physics p){
-        this.p = p;
+    Gui gui;
+    public ButtonResponse(Gui gui){
+        this.gui = gui;
     }
     
     /** Gives the appropriate functions to the keys
@@ -22,19 +22,19 @@ public class ButtonResponse implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP){
-            p.accelerate(p.getShip());
+            gui.getPhysics().getShip().setAccelerating(true);
         }
         if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            p.decelerate(p.getShip());
+            gui.getPhysics().getShip().setDecelerating(true);
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            p.getShip().turnAntiClockwise();
+            gui.getPhysics().getShip().setTurningAntiClockwise(true);
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            p.getShip().turnClockwise();
+            gui.getPhysics().getShip().setTurningClockwise(true);
         }
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            p.shoot();
+            gui.getPhysics().getShip().setShooting(true);
         }
     }
 
@@ -45,5 +45,20 @@ public class ButtonResponse implements KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            gui.getPhysics().getShip().setAccelerating(false);
+        }
+        if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            gui.getPhysics().getShip().setDecelerating(false);
+        }
+        if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            gui.getPhysics().getShip().setTurningAntiClockwise(false);
+        }
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            gui.getPhysics().getShip().setTurningClockwise(false);
+        }
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            gui.getPhysics().getShip().setShooting(false);
+        }
     }
 }

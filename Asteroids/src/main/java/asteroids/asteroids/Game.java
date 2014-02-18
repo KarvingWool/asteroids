@@ -1,38 +1,46 @@
 package asteroids.asteroids;
-
-
-import java.io.File;
-import kayttoliittyma.Kayttoliittyma;
+import kayttoliittyma.Gui;
+import scores.Highscore;
 import sovelluslogiikka.Physics;
 
 /**
- * Handles the creating of the JFrame, and running of the Game loop.
+ * Handles the running of the Game loop.
  *
  * @author xvax@cs
  */
 public class Game implements Runnable {
 
     private Physics p;
-    private Kayttoliittyma k;
-    File file = new File("Highscores.txt");
+    private Gui k;
+    Highscore scores;
     
 
-    public Game(Physics p, Kayttoliittyma k) {
-        this.p = p;
-        this.k = k;
+    public Game() {
+        this.p = new Physics(800, 500, 30);
+        this.scores = new Highscore(p);
+        this.k = new Gui(p, scores);
+        
     }
 
+    /**
+     * The game loop is run in this method.
+     */
     @Override
     public void run() {
+        if(scores.equals("Null:00")){
+            scores.getHighscore();
+        }
+        
 
         k.setup();
         while (p.getShip().getAlive()) {
 
             k.render();
             try {
-                Thread.sleep(30);
+                Thread.sleep(33);
             } catch (Exception e) {
             }
+            p.shipInputReaction();
             p.roundOfMovement();
             p.collisionCount();
             p.deadRemoval();
@@ -53,6 +61,7 @@ public class Game implements Runnable {
                 p.setLevelup(false);
             }
         }
+        scores.checkScore();
 
     }
 
@@ -60,7 +69,7 @@ public class Game implements Runnable {
         return p;
     }
 
-    public Kayttoliittyma getK() {
+    public Gui getK() {
         return k;
     }
     

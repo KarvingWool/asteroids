@@ -3,6 +3,7 @@ package sovelluslogiikka;
 import asteroids.asteroids.Game;
 import java.util.ArrayList;
 import java.util.Random;
+import scores.Highscore;
 
 /**
  * Handles the physics and running of the game.
@@ -17,8 +18,8 @@ public class Physics {
     private int width;
     private int asteroidAmount;
     private boolean levelup = false;
+    private Highscore hscore;
     private int score = 0;
-    private Game g;
 
     /**
      * Sets the height and width limits to the given parameters. Creates one
@@ -58,36 +59,36 @@ public class Physics {
             a.setX(random.nextInt(width));
 
             if (random.nextBoolean()) {
-                a.setVelX(-1 - random.nextInt(2));
+                a.setVelX(-0.5 - (random.nextDouble()*2));
             } else {
-                a.setVelX(random.nextInt(2) + 1);
+                a.setVelX((random.nextDouble()*2) + 0.5);
             }
 
             if (random.nextBoolean()) {
-                a.setY(height);
-                a.setVelY(-1 - random.nextInt(2));
+                a.setY(height-random.nextInt(20));
+                a.setVelY(-0.5 - (random.nextDouble()*2));
             } else {
-                a.setY(0);
-                a.setVelY(1 + random.nextInt(2));
+                a.setY(0+random.nextInt(20));
+                a.setVelY(0.5 + (random.nextDouble()*2));
             }
         }
     }
 
     /**
      * Tests for collisions between the ship and all asteroids, and between all
-     * lasers and asteroids. With a collision, alive is set to false, and in case
-     * of destroyed asteroids, the score is raised.
+     * lasers and asteroids. With a collision, alive is set to false, and in
+     * case of destroyed asteroids, the score is raised.
      */
     public void collisionCount() {
-        for (Asteroid a : asteroids) {
-            if (ship.collision(a) && a.getAlive()) {
+        for (int i = 0; i < asteroids.size(); i++) {
+            if (ship.collision(asteroids.get(i)) && asteroids.get(i).getAlive()) {
                 ship.setAlive(false);
             }
-            for (Laser l : lasers) {
-                if (l.collision(a) && l.getAlive() && a.getAlive()) {
-                    score=score+(asteroidAmount/10);
-                    l.setAlive(false);
-                    a.setAlive(false);
+            for (int e = 0; e < lasers.size(); e++) {
+                if (lasers.get(e).collision(asteroids.get(i)) && lasers.get(e).getAlive() && asteroids.get(i).getAlive()) {
+                    score = score + (asteroidAmount / 10);
+                    lasers.get(e).setAlive(false);
+                    asteroids.get(i).setAlive(false);
                 }
             }
 
@@ -176,6 +177,25 @@ public class Physics {
         }
     }
 
+    public void shipInputReaction() {
+        if (getShip().isAccelerating()) {
+            accelerate(getShip());
+        }
+        if (getShip().isDecelerating()) {
+            decelerate(getShip());
+        }
+        if (getShip().isTurningAntiClockwise()) {
+            getShip().turnAntiClockwise();
+        }
+        if (getShip().isTurningClockwise()) {
+            getShip().turnClockwise();
+        }
+        if (getShip().isShooting()) {
+            shoot();
+        }
+
+    }
+
     /**
      * Calculates the change to VelX and VelY depending on the shapes facing
      * direction.
@@ -203,14 +223,16 @@ public class Physics {
      * to the ships facing direction.
      */
     public void shoot() {
-        Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
-        lasers.add(l);
+        if (lasers.size() < 10) {
+            Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
+            lasers.add(l);
 
-        while ((l.getVelX() * l.getVelX() + (l.getVelY() * l.getVelY())) < 100) {
-            accelerate(l);
+            while ((l.getVelX() * l.getVelX() + (l.getVelY() * l.getVelY())) < 100) {
+                accelerate(l);
+            }
+            l.setVelX(l.getVelX() + getShip().getVelX());
+            l.setVelY(l.getVelY() + getShip().getVelY());
         }
-        l.setVelX(l.getVelX() + getShip().getVelX());
-        l.setVelY(l.getVelY() + getShip().getVelY());
     }
 
     public ArrayList<Asteroid> getAsteroids() {
@@ -236,14 +258,15 @@ public class Physics {
     public int getAsteroidAmount() {
         return asteroidAmount;
     }
-    
-    public int getScore(){
+
+    public int getScore() {
         return score;
     }
 
     public boolean getLevelup() {
         return levelup;
     }
+    
 
     public void setLevelup(boolean levelup) {
         this.levelup = levelup;

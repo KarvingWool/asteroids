@@ -10,6 +10,11 @@ public class Ship extends VectorShape {
 
     private int shipx[] = {-6, 6, 0};
     private int shipy[] = {-6, -6, 12};
+    private boolean turningAntiClockwise = false;
+    private boolean turningClockwise = false;
+    private boolean accelerating = false;
+    private boolean decelerating = false;
+    private boolean shooting = false;
 
     public Ship() {
         super();
@@ -54,4 +59,46 @@ public class Ship extends VectorShape {
         r = new Rectangle((int) getX() - (super.getWidth() / 2), (int) getY() - (super.getHeight() / 2), super.getWidth(), super.getHeight());
         return r;
     }
+
+    public boolean isTurningAntiClockwise() {
+        return turningAntiClockwise;
+    }
+
+    public boolean isTurningClockwise() {
+        return turningClockwise;
+    }
+
+    public boolean isAccelerating() {
+        return accelerating;
+    }
+
+    public boolean isDecelerating() {
+        return decelerating;
+    }
+
+    public boolean isShooting() {
+        return shooting;
+    }
+
+    public void setTurningAntiClockwise(boolean turningAntiClockwise) {
+        this.turningAntiClockwise = turningAntiClockwise;
+    }
+
+    public void setTurningClockwise(boolean turningClockwise) {
+        this.turningClockwise = turningClockwise;
+    }
+
+    public void setAccelerating(boolean accelerating) {
+        this.accelerating = accelerating;
+    }
+
+    public void setDecelerating(boolean decelerating) {
+        this.decelerating = decelerating;
+    }
+
+    public void setShooting(boolean shooting) {
+        this.shooting = shooting;
+    }
+    
+    
 }

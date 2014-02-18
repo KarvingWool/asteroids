@@ -51,3 +51,8 @@ Kuvan ja todellisen faceDir synkronointi. setFaceDir metodi tehty ottamaan vasta
 
 13.02.2014 21:00 - 04:20
 Sekvenssikaavioita 2 kappaletta. Testit wrap aroundille movementissa tehty. Yrityst‰ saada startup screen toimimaan, ei onnistunut. Testejen hienos‰‰tˆ‰, ja paloittelua pienemmiksi osiksi. Collision v‰ltt‰minen jos yksi osapuoli getAlive == false testattu. Counter atribuutti ja elinaika Laserille testattu. Fixed concurrent modification exception in method shoot(). Made it possible to input amount of asteroids before the round. Asteroid luonti siirretty omaan metodiinsa. GameLoop nyt lis‰‰ asteroideja kun kaikki muut ovat tuhottu. Yritin noin 4 tuntia saada Start menua toimimaan, en onnistunut. Hieman ‰rsytt‰‰.
+
+18.02.2014 12:00
+ButtonResponse tehty vaihtamaan ainoastaan boolean muuttujaa, joka m‰‰r‰‰ inputin vaikutuksen. DrawLasers() ja CollisionCOunt() for loopit tehty iteraattomiksi, v‰ltt‰‰kseni concurrentmodificationExceptioni‰. RotationVelocity atribuutti poistettu, ja tilalle laitettu rotationDir ja rotationPosition laskemaan asteroidejen pyˆrimist‰. 
+Pyˆriminen lis‰tty drawAsteroids() metodille. Asteroid liikett‰ ja alkukohtaa tehty randomimmaksi. Testit muokattu, ja testit luotu rotationPositionille. 
+Highscores luokka luotu ja sen metodit get- ja check-highscore.
