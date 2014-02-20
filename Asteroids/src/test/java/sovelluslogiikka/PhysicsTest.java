@@ -10,7 +10,8 @@ public class PhysicsTest {
 
     @Before
     public void before() {
-        p = new Physics(400, 200, 20);
+        p = new Physics(400, 200);
+        p.spawnAsteroids();
     }
 
     @Test

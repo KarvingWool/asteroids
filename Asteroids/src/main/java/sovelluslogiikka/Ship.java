@@ -8,19 +8,18 @@ import java.awt.Polygon;
  */
 public class Ship extends VectorShape {
 
-    private int shipx[] = {-6, 6, 0};
-    private int shipy[] = {-6, -6, 12};
+    private int shipx[] = {-7, 7, 0};
+    private int shipy[] = {-7, -7, 14};
     private boolean turningAntiClockwise = false;
     private boolean turningClockwise = false;
     private boolean accelerating = false;
     private boolean decelerating = false;
-    private boolean shooting = false;
 
     public Ship() {
         super();
         super.setShape(new Polygon(shipx, shipy, shipx.length));
-        super.setHeight(16);
-        super.setWidth(16);
+        super.setHeight(14);
+        super.setWidth(14);
     }
 
     /**
@@ -76,10 +75,6 @@ public class Ship extends VectorShape {
         return decelerating;
     }
 
-    public boolean isShooting() {
-        return shooting;
-    }
-
     public void setTurningAntiClockwise(boolean turningAntiClockwise) {
         this.turningAntiClockwise = turningAntiClockwise;
     }
@@ -95,10 +90,5 @@ public class Ship extends VectorShape {
     public void setDecelerating(boolean decelerating) {
         this.decelerating = decelerating;
     }
-
-    public void setShooting(boolean shooting) {
-        this.shooting = shooting;
-    }
-    
     
 }

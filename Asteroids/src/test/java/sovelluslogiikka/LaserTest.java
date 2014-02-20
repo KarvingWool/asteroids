@@ -15,8 +15,7 @@ public class LaserTest {
 
     @Test
     public void testLaserStartingAtributesThroughShoot() {
-        Physics p = new Physics(400, 200, 20);
-        
+        Physics p = new Physics(400, 200);
         p.getShip().setX(20);
         p.getShip().setY(-15);
         p.getShip().setFaceDir(0);
@@ -47,12 +46,13 @@ public class LaserTest {
     
     @Test
     public void testLaserLifetimeCounter(){
-        Physics p = new Physics(400, 200, 20);
+        Physics p = new Physics(400, 200);
+        p.spawnAsteroids();
         for(Asteroid a : p.getAsteroids()){
             a.setAlive(false);
         }
         l.setVelX(5);
-        for(int i=0;i<30;i++){
+        for(int i=0;i<20;i++){
             p.movement(l);
         }
         assertTrue(l.getAlive());

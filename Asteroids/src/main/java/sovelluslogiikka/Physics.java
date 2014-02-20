@@ -16,30 +16,29 @@ public class Physics {
     private Ship ship;
     private int height;
     private int width;
-    private int asteroidAmount;
     private boolean levelup = false;
     private Highscore hscore;
     private int score = 0;
+    private double gameSpeed = 1;
+    private int asteroidAmount = 20;
+    private boolean firstRound = true; 
 
     /**
      * Sets the height and width limits to the given parameters. Creates one
-     * ship and 20 asteroids, adding the asteroids to their array.
+     * the ship, and sets it in its place.
      *
      * @param width
      * @param height
      */
-    public Physics(int width, int height, int asteroidAmount) {
-        this.asteroidAmount = asteroidAmount;
+    public Physics(int width, int height) {
         this.height = height;
         this.width = width;
         this.ship = new Ship();
         setupShip();
-        spawnAsteroids();
-
     }
 
     /**
-     * Puts all the asteroids and the ship in their starting position.
+     * Puts the ship in its starting position.
      */
     public void setupShip() {
         ship.setX(width / 2);
@@ -48,9 +47,8 @@ public class Physics {
     }
 
     /**
-     * Gives asteroid a its starting position.
+     * Spawns all the asteroids and give them their starting positions.
      *
-     * @param a
      */
     public void spawnAsteroids() {
         for (int i = 0; i < asteroidAmount; i++) {
@@ -59,17 +57,17 @@ public class Physics {
             a.setX(random.nextInt(width));
 
             if (random.nextBoolean()) {
-                a.setVelX(-0.5 - (random.nextDouble()*2));
+                a.setVelX(gameSpeed * (-0.5 - (random.nextDouble() * 2)));
             } else {
-                a.setVelX((random.nextDouble()*2) + 0.5);
+                a.setVelX(gameSpeed * ((random.nextDouble() * 2) + 0.5));
             }
 
             if (random.nextBoolean()) {
-                a.setY(height-random.nextInt(20));
-                a.setVelY(-0.5 - (random.nextDouble()*2));
+                a.setY(height - random.nextInt(20));
+                a.setVelY(gameSpeed * (-0.5 - (random.nextDouble() * 2)));
             } else {
-                a.setY(0+random.nextInt(20));
-                a.setVelY(0.5 + (random.nextDouble()*2));
+                a.setY(0 + random.nextInt(20));
+                a.setVelY(gameSpeed * (0.5 + (random.nextDouble() * 2)));
             }
         }
     }
@@ -171,7 +169,7 @@ public class Physics {
 
         if (v.getClass() == new Laser(0, 0, 0).getClass()) {
             v.setCounter(v.getCounter() + 1);
-            if (v.getCounter() > 30) {
+            if (v.getCounter() > 20) {
                 v.setAlive(false);
             }
         }
@@ -190,9 +188,6 @@ public class Physics {
         if (getShip().isTurningClockwise()) {
             getShip().turnClockwise();
         }
-        if (getShip().isShooting()) {
-            shoot();
-        }
 
     }
 
@@ -203,8 +198,10 @@ public class Physics {
      * @param v
      */
     public void accelerate(VectorShape v) {
-        v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir())));
-        v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir())));
+        if ((v.getVelX() * v.getVelX() + (v.getVelY() * v.getVelY())) < 400) {
+            v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir())));
+            v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir())));
+        }
     }
 
     /**
@@ -267,6 +264,9 @@ public class Physics {
         return levelup;
     }
     
+    public boolean getFirstRound(){
+        return firstRound;
+    }
 
     public void setLevelup(boolean levelup) {
         this.levelup = levelup;
@@ -275,4 +275,16 @@ public class Physics {
     public void setAsteroidAmount(int asteroidAmount) {
         this.asteroidAmount = asteroidAmount;
     }
+
+    public void setFirstRound(boolean firstRound) {
+        this.firstRound = firstRound;
+    }
+
+    public void setGameSpeed(double gameSpeed) {
+        this.gameSpeed = gameSpeed;
+    }
+    
+    
+    
+    
 }

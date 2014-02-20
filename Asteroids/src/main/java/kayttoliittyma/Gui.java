@@ -35,13 +35,11 @@ public class Gui {
     private Highscore highscore;
 
     public Gui(Physics p, Highscore h) {
-        highscore=h;
+        highscore = h;
         this.p = p;
         bResponse = new ButtonResponse(this);
     }
 
-    
-    
     /**
      * Sets up the JFrame and the canvas which will be drawn on.
      */
@@ -100,22 +98,27 @@ public class Gui {
             g2d.setColor(background);
             g2d.fillRect(0, 0, p.getWidth(), p.getHeight());
 
-            g2d.setColor(Color.CYAN);
-            g2d.setFont(new Font("Courier New", Font.PLAIN, 12));
-            g2d.drawString(String.format("FPS: %s", fps), 20, 20);
-            g2d.drawString(String.format("Score:") + Integer.toString(p.getScore()), 20, 30);
-            g2d.drawString(String.format("Highscore:") + highscore.getHighscore(), 20, 40);
-            
 
+            if (p.getFirstRound()) {
+                drawStartingScreen();
+            } else if (!p.getShip().getAlive()) {
+                drawEndScreen();
+            } else {
+                drawLasers();
+                drawAsteroids();
+                drawShip();
 
-            drawLasers();
-            drawAsteroids();
-            drawShip();
+                g2d.setFont(new Font("Courier New", Font.PLAIN, 12));
+                g2d.setColor(Color.CYAN);
+                g2d.setTransform(identity);
+                g2d.drawString(String.format("FPS: %s", fps), 20, 20);
+                g2d.drawString(String.format("Score:") + Integer.toString(p.getScore()), 20, 35);
+                g2d.drawString(String.format("Highscore  ") + highscore.getHighscore(), 20, 50);
 
-            if (p.getLevelup()) {
-                levelupScreen();
+                if (p.getLevelup()) {
+                    levelupScreen();
+                }
             }
-            
             graphics = buffer.getDrawGraphics();
             graphics.drawImage(buffImg, 0, 0, null);
 
@@ -123,6 +126,7 @@ public class Gui {
                 buffer.show();
             }
             Thread.yield();
+
 
         } finally {
 
@@ -164,7 +168,7 @@ public class Gui {
      * Draws all the lasers.
      */
     public void drawLasers() {
-        for (int i=0;i<p.getLasers().size();i++) {
+        for (int i = 0; i < p.getLasers().size(); i++) {
             g2d.setTransform(identity);
             g2d.translate(p.getLasers().get(i).getX(), p.getLasers().get(i).getY());
             g2d.setColor(Color.MAGENTA);
@@ -177,8 +181,27 @@ public class Gui {
      */
     public void levelupScreen() {
         g2d.setColor(Color.RED);
-        g2d.setFont(new Font("Courier New", Font.PLAIN, 30));
-        g2d.drawString(String.format("Get Ready, Spawning more Asteroids"), p.getWidth() / 8, p.getHeight() / 2);
+        g2d.setFont(new Font("Courier New", Font.BOLD, 40));
+        g2d.drawString(String.format("Spawning Asteroids"), (p.getWidth() / 4) - 10, (p.getHeight() / 2) - 40);
+    }
+
+    /**
+     * Draws the Screen at Death. Displays final score.
+     */
+    public void drawEndScreen() {
+        String s = Integer.toString(p.getScore());
+        g2d.setColor(Color.blue);
+        g2d.setFont(new Font("Courier New", Font.BOLD, 40));
+        g2d.drawString(String.format("Game Over"), (p.getWidth() / 4), (p.getHeight() / 2) - 20);
+        g2d.drawString(String.format("Final Score: " + s), (p.getWidth() / 4), (p.getHeight() / 2) + 20);
+
+    }
+
+    public void drawStartingScreen() {
+        g2d.setColor(Color.blue);
+        g2d.setFont(new Font("Courier New", Font.BOLD, 40));
+        g2d.drawString(String.format("Game starting, Good Luck"), (p.getWidth() / 8), (p.getHeight() / 2));
+
     }
 
     public JFrame getFrame() {
@@ -192,7 +215,4 @@ public class Gui {
     public Physics getPhysics() {
         return p;
     }
-    
-    
-    
 }

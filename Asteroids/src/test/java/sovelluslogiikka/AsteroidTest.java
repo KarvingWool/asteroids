@@ -6,10 +6,11 @@ import org.junit.Before;
 
 public class AsteroidTest {
 
-    Physics p = new Physics(400, 200, 20);
+    Physics p = new Physics(400, 200);
 
     @Before
     public void before() {
+        p.spawnAsteroids();
     }
 
     @Test

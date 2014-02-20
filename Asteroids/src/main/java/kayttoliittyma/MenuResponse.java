@@ -4,14 +4,9 @@
  */
 package kayttoliittyma;
 
-import asteroids.asteroids.Game;
-import java.awt.ItemSelectable;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 
 /**
  *
@@ -19,11 +14,9 @@ import javax.swing.JFrame;
  */
 public class MenuResponse implements ActionListener{
     private Menu m;
-    private JFrame frame;
     
-    public MenuResponse(Menu m, JFrame frame){
+    public MenuResponse(Menu m){
         this.m = m;
-        this.frame = frame;
     }
 
     @Override
@@ -37,6 +30,19 @@ public class MenuResponse implements ActionListener{
         if("30".equals(e.getActionCommand())){
             m.setAsteroidAmount(30);
         }
+        if("x1.0".equals(e.getActionCommand())){
+            m.setSpeed(1);
+        }
+        if("x1.2".equals(e.getActionCommand())){
+            m.setSpeed(1.2);
+        }
+        if("x1.5".equals(e.getActionCommand())){
+            m.setSpeed(1.5);
+        }
+        if("x2.0".equals(e.getActionCommand())){
+            m.setSpeed(2);
+        }
+        
     }
 
     
