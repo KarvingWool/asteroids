@@ -52,7 +52,11 @@ Kuvan ja todellisen faceDir synkronointi. setFaceDir metodi tehty ottamaan vasta
 13.02.2014 21:00 - 04:20
 Sekvenssikaavioita 2 kappaletta. Testit wrap aroundille movementissa tehty. Yritystä saada startup screen toimimaan, ei onnistunut. Testejen hienosäätöä, ja paloittelua pienemmiksi osiksi. Collision välttäminen jos yksi osapuoli getAlive == false testattu. Counter atribuutti ja elinaika Laserille testattu. Fixed concurrent modification exception in method shoot(). Made it possible to input amount of asteroids before the round. Asteroid luonti siirretty omaan metodiinsa. GameLoop nyt lisää asteroideja kun kaikki muut ovat tuhottu. Yritin noin 4 tuntia saada Start menua toimimaan, en onnistunut. Hieman ärsyttää.
 
-18.02.2014 12:00
+18.02.2014 12:00 - 18:00
 ButtonResponse tehty vaihtamaan ainoastaan boolean muuttujaa, joka määrää inputin vaikutuksen. DrawLasers() ja CollisionCOunt() for loopit tehty iteraattomiksi, välttääkseni concurrentmodificationExceptioniä. RotationVelocity atribuutti poistettu, ja tilalle laitettu rotationDir ja rotationPosition laskemaan asteroidejen pyörimistä. 
 Pyöriminen lisätty drawAsteroids() metodille. Asteroid liikettä ja alkukohtaa tehty randomimmaksi. Testit muokattu, ja testit luotu rotationPositionille. 
 Highscores luokka luotu ja sen metodit get- ja check-highscore.
+Menu metodi luotu uudestaan, toimii, muttei pelin kanssa.
+
+19.02. 23:00-03:00
+Canvasille piirrettävä teksti tuotu eteen, levelUpscreen saatu oikealle paikalle. ButtonResponse välilyönnille tehty toimivaksi ainoastaan tietyin väliajoin. drawEndScreen metodi luotu ja implementoitu. DrawStartingScreen metodi luotu ja implementoitu. Menu luokka saatu vihdoinkin toimimaan. Menu luokkaan lisätty ja implementoitu spd JRadioButtonit. Menusta tehty asteroidejen määrän ja asteroidin vauhdin valinta mahdolliseksi. Implementoitu.
