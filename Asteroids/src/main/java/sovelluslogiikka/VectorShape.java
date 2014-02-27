@@ -8,7 +8,7 @@ import java.awt.Shape;
  */
 public class VectorShape {
 
-    private int counter =0;
+    private int counter = 0;
     private double x, y;
     private double velX, velY;
     private double faceDir;
@@ -18,13 +18,30 @@ public class VectorShape {
     private Shape shape;
 
     public VectorShape() {
-        setX(0.0);
-        setY(0.0);
         setVelX(0.0);
         setVelY(0.0);
-
         setFaceDir(90.0);
         setAlive(true);
+    }
+
+    /**
+     * Sets the facing direction in faceDir. Method translates all numbers to
+     * between 0-359 degrees.
+     *
+     * @param faceDir
+     */
+    public void setFaceDir(double faceDir) {
+        if (faceDir > 359) {
+            while (faceDir > 359) {
+                faceDir = faceDir - 360;
+            }
+        }
+        if (faceDir < 0) {
+            while (faceDir < 0) {
+                faceDir = faceDir + 360;
+            }
+        }
+        this.faceDir = faceDir;
     }
 
     public void setShape(Shape shape) {
@@ -55,26 +72,6 @@ public class VectorShape {
         this.velY = velocityY;
     }
 
-    /**
-     * Sets the facing direction in faceDir. Method translates all numbers to between
-     * 0-359 degrees.
-     *
-     * @param faceDir
-     */
-    public void setFaceDir(double faceDir) {
-        if (faceDir > 359) {
-            while (faceDir > 359) {
-                faceDir = faceDir - 360;
-            }
-        }
-        if (faceDir < 0) {
-            while (faceDir < 0) {
-                faceDir = faceDir + 360;
-            }
-        }
-        this.faceDir=faceDir;
-    }
-
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
@@ -87,13 +84,14 @@ public class VectorShape {
         this.y = y;
     }
 
-     public int getCounter() {
+    public int getCounter() {
         return counter;
     }
 
     public void setCounter(int counter) {
         this.counter = counter;
     }
+
     public Shape getShape() {
         return shape;
     }

@@ -55,4 +55,16 @@ public class ShipTest {
         assertEquals(30, s.getFaceDir(), 0.01);
     }
     
+    @Test
+    public void testSetFaceDirTransalatesNumberstoBetween0And360(){
+        s.setFaceDir(359);
+        assertEquals(359, s.getFaceDir(), 0.1);
+        s.setFaceDir(1500);
+        assertEquals(60, s.getFaceDir(), 0.1);
+        s.setFaceDir(0);
+        assertEquals(0, s.getFaceDir(), 0.1);
+        s.setFaceDir(-800);
+        assertEquals(280, s.getFaceDir(), 0.1);
+    }
+    
 }

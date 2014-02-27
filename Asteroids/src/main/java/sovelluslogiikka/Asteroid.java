@@ -35,28 +35,42 @@ public class Asteroid extends VectorShape {
         r = new Rectangle((int) getX() - (super.getWidth() / 2), (int) getY() - (super.getHeight() / 2), super.getWidth(), super.getHeight());
         return r;
     }
-    
+
     /**
      * Either adds or subtracts one from rotationPosition depending on
      * rotationDir. Wraps the number around, if it exceeds 359 or goes below 0.
+     *
      * @return rotationPosition
      */
-
-    public double getRotationPosition() {
-        if(rotationDir){
+    public double calculateRotationPosition() {
+        if (rotationDir) {
             rotationPosition++;
         } else {
             rotationPosition--;
         }
-        
-        if(rotationPosition>=359){
-            rotationPosition=0;
+
+        if (rotationPosition > 359) {
+            rotationPosition = 0;
+        } else if (rotationPosition < 0) {
+            rotationPosition = 359;
         }
-        if(rotationPosition<=0){
-            rotationPosition=359;
-        }
-        
+
         return Math.toRadians(rotationPosition);
     }
 
+    public boolean getRotationDir() {
+        return rotationDir;
+    }
+
+    public void setRotationDir(boolean rotationDir) {
+        this.rotationDir = rotationDir;
+    }
+
+    public int getRotationPosition() {
+        return rotationPosition;
+    }
+
+    public void setRotationPosition(int rotationPosition) {
+        this.rotationPosition = rotationPosition;
+    }
 }

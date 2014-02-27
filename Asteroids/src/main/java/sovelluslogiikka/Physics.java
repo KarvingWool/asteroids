@@ -21,11 +21,11 @@ public class Physics {
     private int score = 0;
     private double gameSpeed = 1;
     private int asteroidAmount = 20;
-    private boolean firstRound = true; 
+    private boolean firstRound = true;
 
     /**
-     * Sets the height and width limits to the given parameters. Creates one
-     * the ship, and sets it in its place.
+     * Sets the height and width limits to the given parameters. Creates the
+     * ship, and sets it in its place.
      *
      * @param width
      * @param height
@@ -47,7 +47,8 @@ public class Physics {
     }
 
     /**
-     * Spawns all the asteroids and give them their starting positions.
+     * Spawns asteroids corresponding to the parameter asteroidAmount,
+     * and give them their starting positions and velocities.
      *
      */
     public void spawnAsteroids() {
@@ -73,8 +74,8 @@ public class Physics {
     }
 
     /**
-     * Tests for collisions between the ship and all asteroids, and between all
-     * lasers and asteroids. With a collision, alive is set to false, and in
+     * Tests for collisions between the ship and the asteroids, and between all
+     * lasers and the asteroids. With a collision, alive is set to false, and in
      * case of destroyed asteroids, the score is raised.
      */
     public void collisionCount() {
@@ -144,9 +145,9 @@ public class Physics {
     }
 
     /**
-     * Adds the velX and velY of parameter v, to x and y respectively. If the
-     * new x or y were to be out of bounds, the method wraps the x or y to the
-     * opposite side of the field.
+     * Adds the velX and velY of the object v, to its coordinatesx and y 
+     * respectively. If the new x or y were to be out of bounds, 
+     * the method wraps the x or y to the opposite side of the field.
      *
      * @param v
      */
@@ -175,6 +176,11 @@ public class Physics {
         }
     }
 
+    /**
+     * This method checks the booleans for the turning and moving of the ship,
+     * which are controlled by an keylistener. If true, the corresponding
+     * methods are called.
+     */
     public void shipInputReaction() {
         if (getShip().isAccelerating()) {
             accelerate(getShip());
@@ -193,26 +199,34 @@ public class Physics {
 
     /**
      * Calculates the change to VelX and VelY depending on the shapes facing
-     * direction.
+     * direction. If the two vectors hypotenuse is over 20^2, nothing is done.
      *
      * @param v
      */
     public void accelerate(VectorShape v) {
-        if ((v.getVelX() * v.getVelX() + (v.getVelY() * v.getVelY())) < 400) {
-            v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir())));
-            v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir())));
+
+        double vely = v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir()));
+        double velx = v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir()));
+        if (Math.pow(velx, 2) + Math.pow(vely, 2) < 400) {
+            v.setVelY(vely);
+            v.setVelX(velx);
         }
     }
 
     /**
      * Calculates the change to VelX and VelY depending on the inverse of the
-     * shapes facing direction.
+     * shapes facing direction. If the two vectors hypotenuse is over 20^2,
+     * nothing is done.
      *
      * @param v
      */
     public void decelerate(VectorShape v) {
-        v.setVelY(v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir() + 180)));
-        v.setVelX(v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir() + 180)));
+        double vely = v.getVelY() + Math.sin(Math.toRadians(v.getFaceDir() + 180));
+        double velx = v.getVelX() - Math.cos(Math.toRadians(v.getFaceDir() + 180));
+        if (Math.pow(velx, 2) + Math.pow(vely, 2) < 400) {
+            v.setVelY(vely);
+            v.setVelX(velx);
+        }
     }
 
     /**
@@ -220,16 +234,26 @@ public class Physics {
      * to the ships facing direction.
      */
     public void shoot() {
-        if (lasers.size() < 10) {
-            Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
-            lasers.add(l);
 
-            while ((l.getVelX() * l.getVelX() + (l.getVelY() * l.getVelY())) < 100) {
-                accelerate(l);
-            }
-            l.setVelX(l.getVelX() + getShip().getVelX());
-            l.setVelY(l.getVelY() + getShip().getVelY());
+        Laser l = new Laser(ship.getX(), ship.getY(), ship.getFaceDir());
+        lasers.add(l);
+
+        while ((l.getVelX() * l.getVelX() + (l.getVelY() * l.getVelY())) < 100) {
+            accelerate(l);
         }
+        l.setVelX(l.getVelX() + getShip().getVelX());
+        l.setVelY(l.getVelY() + getShip().getVelY());
+
+    }
+
+    /**
+     * Calculates the score by multiplying it by game speed, and returns the
+     * answer.
+     *
+     * @return score
+     */
+    public int calculateScore() {
+        return (int) (gameSpeed * score);
     }
 
     public ArrayList<Asteroid> getAsteroids() {
@@ -256,15 +280,11 @@ public class Physics {
         return asteroidAmount;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public boolean getLevelup() {
         return levelup;
     }
-    
-    public boolean getFirstRound(){
+
+    public boolean getFirstRound() {
         return firstRound;
     }
 
@@ -283,8 +303,4 @@ public class Physics {
     public void setGameSpeed(double gameSpeed) {
         this.gameSpeed = gameSpeed;
     }
-    
-    
-    
-    
 }

@@ -26,9 +26,9 @@ public class Highscore {
      * the score along with the name is taken, and the old highscore replaced.
      */
     public void checkScore() {
-        if (p.getScore() > Integer.parseInt(highscore.split(":")[1])) {
+        if (p.calculateScore() > Integer.parseInt(highscore.split(":")[1])) {
             String name = JOptionPane.showInputDialog("Highscore! Input name:");
-            highscore = name+ ":" + p.getScore();
+            highscore = name+ ":" + p.calculateScore();
             File scoreFile = new File("highscore.dat");
             if(!scoreFile.exists()){
                 try{
@@ -72,7 +72,7 @@ public class Highscore {
             buffReader = new BufferedReader(reader);
             return buffReader.readLine();
         } catch (Exception e) {
-            return "0";
+            return "null:0";
         } finally {
             try {
                 if (buffReader != null) {

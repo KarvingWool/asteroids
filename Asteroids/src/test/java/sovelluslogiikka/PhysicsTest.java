@@ -24,11 +24,11 @@ public class PhysicsTest {
     @Test
     public void testCollisionCount() {
         for (int i = 0; i < 10; i++) {
-            p.getAsteroids().get(i).setX(p.getWidth()/2);
-            p.getAsteroids().get(i).setY(p.getHeight()/2);
+            p.getAsteroids().get(i).setX(p.getWidth() / 2);
+            p.getAsteroids().get(i).setY(p.getHeight() / 2);
             p.shoot();
         }
-  //      assertTrue(p.getShip().getAlive());
+        //      assertTrue(p.getShip().getAlive());
         p.collisionCount();
         assertFalse(p.getShip().getAlive());
         for (int i = 0; i < 10; i++) {
@@ -67,9 +67,9 @@ public class PhysicsTest {
     public void testDeadRemovalAsteroids() {
         p.shoot();
         p.shoot();
-        for(Asteroid a : p.getAsteroids()){
-            a.setX(p.getWidth()/2);
-            a.setY(p.getHeight()/2);
+        for (Asteroid a : p.getAsteroids()) {
+            a.setX(p.getWidth() / 2);
+            a.setY(p.getHeight() / 2);
         }
         p.collisionCount();
         p.deadRemoval();
@@ -88,18 +88,18 @@ public class PhysicsTest {
     public void testDeadRemovalLasers() {
         p.shoot();
         p.shoot();
-        for(int i=0;i<6;i++){
-            p.getAsteroids().get(i).setX(p.getWidth()/2);
-            p.getAsteroids().get(i).setY(p.getHeight()/2);
+        for (int i = 0; i < 6; i++) {
+            p.getAsteroids().get(i).setX(p.getWidth() / 2);
+            p.getAsteroids().get(i).setY(p.getHeight() / 2);
         }
         p.collisionCount();
         p.deadRemoval();
         assertEquals(0, p.getLasers().size());
-        
+
         for (int i = 0; i < 10; i++) {
             p.shoot();
         }
-        
+
         p.collisionCount();
         p.deadRemoval();
         assertEquals(6, p.getLasers().size());
@@ -170,6 +170,20 @@ public class PhysicsTest {
     }
 
     @Test
+    public void testAccelerateHasMax() {
+        p.getShip().setVelY(19);
+        p.accelerate(p.getShip());
+        assertEquals(19, p.getShip().getVelY(), 0.01);
+
+        p.getShip().setVelY(19);
+        p.getShip().setVelX(6);
+        p.getShip().setFaceDir(180);
+        p.accelerate(p.getShip());
+        assertEquals(6, p.getShip().getVelX(), 0.01);
+
+    }
+
+    @Test
     public void testDecelerate() {
         p.getShip().setFaceDir(180);
 
@@ -190,6 +204,21 @@ public class PhysicsTest {
     }
 
     @Test
+    public void testDecelerateHasMax() {
+        p.getShip().setFaceDir(270);
+        p.getShip().setVelY(19);
+        p.decelerate(p.getShip());
+        assertEquals(19, p.getShip().getVelY(), 0.01);
+
+        p.getShip().setVelY(19);
+        p.getShip().setVelX(6);
+        p.getShip().setFaceDir(0);
+        p.decelerate(p.getShip());
+        assertEquals(6, p.getShip().getVelX(), 0.01);
+
+    }
+
+    @Test
     public void testRoundOfMovement() {
         p.getAsteroids().get(0).setX(100);
         p.getAsteroids().get(0).setY(50);
@@ -205,5 +234,88 @@ public class PhysicsTest {
         assertEquals(44, p.getAsteroids().get(0).getY(), 0.01);
         assertEquals(90, p.getLasers().get(0).getY(), 0.01);
         assertEquals(97, p.getShip().getY(), 0.01);
+    }
+
+    @Test
+    public void testShipInputReactionAccelerate() {
+        p.shipInputReaction();
+        p.getShip().setAccelerating(true);
+        p.shipInputReaction();
+        assertEquals(1, p.getShip().getVelY(), 0.01);
+    }
+
+    @Test
+    public void testShipInputReactionDelerate() {
+        p.shipInputReaction();
+        p.getShip().setDecelerating(true);
+        p.shipInputReaction();
+        assertEquals(-1, p.getShip().getVelY(), 0.01);
+    }
+
+    @Test
+    public void testShipInputReactionTurnAntiClockwise() {
+        p.shipInputReaction();
+        p.getShip().setTurningAntiClockwise(true);
+        p.shipInputReaction();
+        assertEquals(110, p.getShip().getFaceDir(), 0.1);
+    }
+
+    @Test
+    public void testShipInputReactionTurnClockwise() {
+        p.shipInputReaction();
+        p.getShip().setTurningClockwise(true);
+        p.shipInputReaction();
+        assertEquals(70, p.getShip().getFaceDir(), 0.1);
+    }
+
+    @Test
+    public void testScoreCount() {
+        assertEquals(0, p.calculateScore(), 0.1);
+        p.spawnAsteroids();
+        for (int i = 0; i < 5; i++) {
+            p.shoot();
+            p.getAsteroids().get(i).setX(p.getWidth() / 2);
+            p.getAsteroids().get(i).setY(p.getHeight() / 2);
+        }
+        p.collisionCount();
+        assertEquals(10, p.calculateScore(), 0.1);
+    }
+
+    @Test
+    public void testScoreProportionalToAsteroidAmount() {
+        assertEquals(0, p.calculateScore(), 0.1);
+        p.setAsteroidAmount(30);
+        p.spawnAsteroids();
+        for (int i = 0; i < 5; i++) {
+            p.shoot();
+            p.getAsteroids().get(i).setX(p.getWidth() / 2);
+            p.getAsteroids().get(i).setY(p.getHeight() / 2);
+        }
+        p.collisionCount();
+        assertEquals(15, p.calculateScore(), 0.1);
+        p.setAsteroidAmount(10);
+        p.shoot();
+        p.getAsteroids().get(10).setX(p.getWidth() / 2);
+        p.getAsteroids().get(10).setY(p.getHeight() / 2);
+        p.collisionCount();
+        assertEquals(16, p.calculateScore());
+    }
+
+    @Test
+    public void testCalculateScoreAffectedByGameSpeed() {
+        assertEquals(0, p.calculateScore());
+        p.spawnAsteroids();
+        for (int i = 0; i < 5; i++) {
+            p.shoot();
+            p.getAsteroids().get(i).setX(p.getWidth() / 2);
+            p.getAsteroids().get(i).setY(p.getHeight() / 2);
+        }
+        p.collisionCount();
+        p.setGameSpeed(1.2);
+        assertEquals(12, p.calculateScore());
+        p.setGameSpeed(1.5);
+        assertEquals(15, p.calculateScore());
+        p.setGameSpeed(2);
+        assertEquals(20, p.calculateScore());
     }
 }

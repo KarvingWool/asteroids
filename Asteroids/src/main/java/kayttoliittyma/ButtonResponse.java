@@ -1,7 +1,7 @@
 package kayttoliittyma;
 
 /**
- * A KeyListener class, which defines functions for certain KeyEvents.
+ * A KeyListener class, which defines functions for certain KeyEvents within the game.
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +19,9 @@ public class ButtonResponse implements KeyListener {
     }
 
     /**
-     * Gives the appropriate functions to the keys up, down, left, right and
+     * Sets the corresponding booleans to true when the keys up, down, left or right
+     * is pressed. With space, if the time between this press and the previous shoot is
+     * long enough, the shoot method from physics is called.
      * space.
      *
      * @param e
@@ -50,6 +52,11 @@ public class ButtonResponse implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * With the release of a directional key, sets the corresponding boolean to false
+     * which was made to true by the pressing of the key.
+     * @param e 
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {

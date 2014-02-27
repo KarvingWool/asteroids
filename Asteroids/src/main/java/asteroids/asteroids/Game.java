@@ -5,7 +5,8 @@ import scores.Highscore;
 import sovelluslogiikka.Physics;
 
 /**
- * Handles the running of the Game loop.
+ * Handles the running of the Game loop and creating of the
+ * Highscore, Gui and Physics classes.
  *
  * @author xvax@cs
  */
@@ -17,6 +18,9 @@ public class Game implements Runnable {
     private double gameSpeed = 1;
     private int asteroidAmount = 20;
 
+    /**
+     * Creates a new Physics, Highscore and Gui.
+     */
     public Game() {
         this.p = new Physics(800, 500);
         this.scores = new Highscore(p);
@@ -34,8 +38,8 @@ public class Game implements Runnable {
             scores.getHighscore();
         }
 
-
         gui.setup();
+        gui.getFrame().toFront();
         p.setAsteroidAmount(asteroidAmount);
         p.setGameSpeed(gameSpeed);
         p.spawnAsteroids();
@@ -43,9 +47,9 @@ public class Game implements Runnable {
 
             if (p.getFirstRound()) {
                 gui.render();
+                p.setFirstRound(false);
                 try {
-                    Thread.sleep(4000);
-                    p.setFirstRound(false);
+                    Thread.sleep(4000);   
                 } catch (Exception e) {
                 }
             }

@@ -10,11 +10,11 @@ import javax.swing.WindowConstants;
 import sovelluslogiikka.Physics;
 
 /**
- * Manages the Statup Menu.
+ * Manages the Startup Menu.
  *
  * @author JJV
  */
-public class Menu {
+public class Menu implements Runnable{
 
     private JFrame frame;
     private int asteroidAmount = 20;
@@ -26,6 +26,11 @@ public class Menu {
         this.g = g;
     }
 
+    /**
+     * Creates the JFrame, runs creatComponents() and packs the frame to be
+     * readily shown.
+     */
+    @Override
     public void run() {
         frame = new JFrame("Asteroids Settings");
         frame.setPreferredSize(new Dimension(400, 300));
@@ -37,6 +42,11 @@ public class Menu {
         frame.setVisible(true);
     }
 
+    /**
+     * Creates the Menu JFrames buttons, links the correct responses to them and
+     * finally adds them to the frames content
+     * @param container 
+     */
     private void createComponents(Container container) {
         BoxLayout layout = new BoxLayout(container, BoxLayout.Y_AXIS);
         container.setLayout(layout);
