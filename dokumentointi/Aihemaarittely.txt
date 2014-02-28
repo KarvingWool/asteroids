@@ -6,4 +6,5 @@ K‰ytt‰j‰t: Pelaaja
 Pelaajan toiminnot:
 ∑ Lasertykki, jota k‰ytet‰‰n asteroidejen tuhoamiseen.
 ∑ Ohjausj‰rjestelm‰
+. Highscore
 

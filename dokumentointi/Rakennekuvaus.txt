@@ -1,0 +1,19 @@
+Rakennekuvaus
+
+Asteroids pelin main luokka on App, joka luo Menu ja Game olion.
+Tämän jälkeen App aloittaa Menu olion pyörimisen, ja varmista että Game olio ei ala pyöriä ennen kun Menu olio on suljettu.
+
+Menu olio on vastuussa pelin alku valikosta jossa valitaan asteroidejen määrä ja nopeus.
+
+Game olio luo uuden Physics, Gui ja Highscore olion, ja pyörittää pelin GameLoop:ia.
+
+Gui olion tehtävänä on luoda itse pelin JFrame, ja renderoida frameiä sitä mukaa kun on tarve. Olio luo ja liittää frameiin myös ButtonResponse olion.
+
+Highscore olio on vastuussa highscorein hausta ja tallentamisesta. Jos highscore.dat tiedostoa ei löydy asteroids pää hakemistosta, se luodaan. Olio tallentaa tiedostoon uuden highscorein nimen kera jos vanhan pistemäärä ylittyy.
+
+Physics olio on vastuussa pelin sovelluslogiikasta. Täällä lasketaan pelille välttämättömien objektejen liikkeet, törmäykset, lisäämiset ja poistamiset. Täällä myös luodaan kaikki tarvittavat VectorShape oliot.
+
+VectorShape on yläluokka Asteroid, Laser ja Ship luokille, jossa on alaluokille yhteiset atribuutit sekä näiden setterit ja getterit.
+Asteroid luokka on vastuussa asteroideista, ja näille ominaisista ominaisuuksista. Rotationistä sekä sen koosta ja muodosta.
+Laser luokka on vastuussa laasereista. Tälle ominaisia atribuutteja ovat sen koko ja muoto, ja asteroidin kanssa törmäyksen tarkistaminen tapahtuu täällä.
+Ship luokka on vastuussa pelin aluksesta. Aluksen koko ja muoto myös määritellään, sekä tämän lisäksi user inputtiin liittyviä aspekteja, kuten kääntyminen, kiihdyttäminen ja jarruttaminen tapahtuvat täälä.
