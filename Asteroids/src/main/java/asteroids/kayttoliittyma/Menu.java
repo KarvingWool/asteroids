@@ -1,4 +1,4 @@
-package kayttoliittyma;
+package asteroids.kayttoliittyma;
 
 import asteroids.asteroids.Game;
 import java.awt.Container;
@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.WindowConstants;
-import sovelluslogiikka.Physics;
+import asteroids.sovelluslogiikka.Physics;
 
 /**
  * Manages the Startup Menu.

@@ -1,0 +1,1 @@
+Jar tiedosto toimii omalla koneellani, mutta en saanut sit‰ toimimaan muilla koneilla vaikka muutaman tunnin yritin. irciss‰ ei osattu auttaa, ja todettiin vain ett‰ pom tiedosto n‰ytt‰‰ hyv‰lt‰.

@@ -1,4 +1,4 @@
-package sovelluslogiikka;
+package asteroids.sovelluslogiikka;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -9,14 +9,30 @@ import java.util.Random;
  */
 public class Asteroid extends VectorShape {
 
+    /**
+     *The x-coordinates for the outline of an asteroid.
+     */
     private int[] astx = {-20, -13, 0, 20, 22, 20, 12, 2, -10, -22, -16};
+    /**
+     * The y-coordinates for the outline of an asteroid.
+     */
     private int[] asty = {20, 23, 17, 20, 16, -20, -22, -14, -17, -20, -5};
+    /**
+     * A boolean defining which way the asteroid rotates. True for Anticlockwise
+     * and false for clockwise.
+     */
     private boolean rotationDir;
+    /**
+     * The number between 0 and 360 defining the asteroids position of rotation
+     * used when drawing the asteroid.
+     */
     private int rotationPosition;
     private Random random = new Random();
 
-    /*The constructor creates an Asteroid with a random rotation
-     *velocity, and a set width and height.
+    /**
+     * The constructor creates an Asteroid with a random rotation
+     * direction and position, a width nd height of 40, and sets the
+     * shape according to the points defined in astx and asty.
      */
     public Asteroid() {
         super();

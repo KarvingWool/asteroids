@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package kayttoliittyma;
+package asteroids.kayttoliittyma;
 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * The ActionLister class used by the Menu object.
  * @author JJV
  */
 public class MenuResponse implements ActionListener{

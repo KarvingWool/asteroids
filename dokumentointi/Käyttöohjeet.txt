@@ -1,0 +1,26 @@
+Käyttöohjeet
+
+Näppäimet:
+Nuoli ylös: Kiihdyttää alusta suuntaan johon nokka osoittaa.
+Nuoli alas: Kiihdyttää alusta vastakkaiseen suuntaan kuin aluksen nokka osoittaa.
+Nuoli vasemmalle: kääntää alusta vastapäivään.
+Nuoli oikealle: Kääntää alusta myötäpäivään.
+Välilyönti: Ampuu laaserin aluksen osoittamaan suuntaan.
+
+Pelin kulku:
+Pelin tarkoitus on tuhota mahdollisimman monta asteroidia ennen kuin
+sellaiseen törmää. Törmäys lopettaa pelin.
+Jos kaikki asteroidit tuhotaan, siiretään alus takaisin alkupisteeseen,
+ja asteroideja luodaan lisää 5 enemmän kuin edellisellä kierroksella.
+
+Pisteet:
+Pisteitä kertyy jokaisesta asteroidista joka tuhotaan.
+Pistemäärä joka tulee jokaisesta tuhosta on riippuvainen asteroidejen määrästä kierroksella,
+sekä asteroidejen nopeudesta.
+Pistemäärä per tuho on asteroidejen määrä kierroksen alussa jaettuna kymmenellä.
+Koknaispistemäärä kerrotaan numerolla joka on valittu pelin nopeudeksi esim.(1, 1.3, 2.0).
+
+Muuta huomioitavaa:
+Highscore tiedosto, joka säilyttää parhaimman pistetuloksesi, luodaan tiedostoon jonka
+hakemisto on sama kuin pelitiedoston. Jos ainoastaan peli-tiedoston siirtää, ei peli tule
+muistamaan aiempaa parasta tulostasi ja luo uuden highscore tiedoston.

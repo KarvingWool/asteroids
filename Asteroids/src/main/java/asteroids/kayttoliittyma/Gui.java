@@ -1,4 +1,4 @@
-package kayttoliittyma;
+package asteroids.kayttoliittyma;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -6,19 +6,16 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import scores.Highscore;
-import sovelluslogiikka.*;
+import asteroids.scores.Highscore;
+import asteroids.sovelluslogiikka.*;
 
 /**
  * Handles graphics and the Rendering of the canvas.
  */
 public class Gui {
 
-    private AffineTransform identity = new AffineTransform();
-    private JFrame frame;
     private Physics p;
-    private Canvas canvas;
-    private ButtonResponse bResponse;
+    private AffineTransform identity = new AffineTransform();
     private BufferStrategy buffer;
     private BufferedImage buffImg;
     private GraphicsEnvironment grEnv;
@@ -26,12 +23,42 @@ public class Gui {
     private GraphicsConfiguration grConf;
     private Graphics graphics = null;
     private Graphics2D g2d = null;
+    /**
+     * The games JFrame.
+     */
+    private JFrame frame;
+    /**
+     * The JFrames canvas, which is drawn upon.
+     */
+    private Canvas canvas;
+    /**
+     * The keyListener attached to the JFrame.
+     */
+    private ButtonResponse bResponse;
+    /**
+     * The background color.
+     */
     private Color background = Color.BLACK;
-    private int fps=0;
-    private int frames=0;
-    private long totalTime=0;
-    private long curTime=System.currentTimeMillis();
-    private long lastTime=curTime;
+    /**
+     * Frames per second.
+     */
+    private int fps = 0;
+    /**
+     * Used as a counter for fps.
+     */
+    private int frames = 0;
+    /**
+     * The time between lasttime and curTime.
+     */
+    private long totalTime = 0;
+    /**
+     * The real current time.
+     */
+    private long curTime = System.currentTimeMillis();
+    /**
+     * The previous curTime.
+     */
+    private long lastTime = curTime;
     private Highscore highscore;
 
     public Gui(Physics p, Highscore h) {
@@ -177,7 +204,7 @@ public class Gui {
     }
 
     /**
-     * Draws the Screen at Death. Displays final score.
+     * Draws the screen at Death. Displays final score.
      */
     public void drawEndScreen() {
         String s = Integer.toString(p.calculateScore());

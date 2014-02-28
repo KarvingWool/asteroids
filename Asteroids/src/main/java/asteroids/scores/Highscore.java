@@ -1,8 +1,8 @@
-package scores;
+package asteroids.scores;
 
 import java.io.*;
 import javax.swing.JOptionPane;
-import sovelluslogiikka.Physics;
+import asteroids.sovelluslogiikka.Physics;
 
 /**
  * This class handles the checking of the score made during the game,
@@ -12,8 +12,17 @@ import sovelluslogiikka.Physics;
 public class Highscore {
 
     private Physics p;
+    /**
+     * The string containing the current highscore in the form of
+     * "Name:99".
+     */
     private String highscore;
 
+    /**
+     * Saves the linked Physics object, and calls the getHighscore method
+     * to get the parameters for the String highscore.
+     * @param P 
+     */
     public Highscore(Physics P) {
         this.p = P;
         highscore=getHighscore();
@@ -61,7 +70,7 @@ public class Highscore {
 
     /**
      * This method fetches the highscore as a string from highscores.dat
-     * @return highscore as a string
+     * @return highscore
      */
     public String getHighscore() {
         FileReader reader = null;

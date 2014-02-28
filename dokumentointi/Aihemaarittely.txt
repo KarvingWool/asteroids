@@ -1,7 +1,7 @@
 Aihemäärittely
 
 Aihe: Asteroids peli
-Peli, jossa pelaaja ohjaa alusta jonka on tarkoitus tuhota kaikki asteroidit kentältä, saamalla välttäen niihin törmäystä.
+Peli, jossa pelaaja ohjaa alusta jonka on tarkoitus tuhota asteroideja kentältä niin pitkään kuin vain mahdollista, samalla välttäen niihin törmäystä.
 Käyttäjät: Pelaaja
 Pelaajan toiminnot:
 · Lasertykki, jota käytetään asteroidejen tuhoamiseen.

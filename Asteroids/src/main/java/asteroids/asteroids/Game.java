@@ -1,8 +1,8 @@
 package asteroids.asteroids;
 
-import kayttoliittyma.Gui;
-import scores.Highscore;
-import sovelluslogiikka.Physics;
+import asteroids.kayttoliittyma.Gui;
+import asteroids.scores.Highscore;
+import asteroids.sovelluslogiikka.Physics;
 
 /**
  * Handles the running of the Game loop and creating of the
@@ -12,10 +12,25 @@ import sovelluslogiikka.Physics;
  */
 public class Game implements Runnable {
 
+    /**
+     * The games physics object.
+     */
     private Physics p;
+    /**
+     * The games Gui Object.
+     */
     private Gui gui;
+    /**
+     * The games Highscore object.
+     */
     private Highscore scores;
+    /**
+     * This attribute defines how fast the asteroids will move.
+     */
     private double gameSpeed = 1;
+    /**
+     * This attribute defines how many asteroids will be spawned.
+     */
     private int asteroidAmount = 20;
 
     /**
@@ -29,7 +44,8 @@ public class Game implements Runnable {
     }
 
     /**
-     * The game loop is run in this method.
+     * The game loop is run in this method. The JFrame is set up, as is the
+     * Physics of the game. The while(ship.alive()) loop is then started.
      */
     @Override
     public void run() {

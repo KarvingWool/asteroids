@@ -1,26 +1,60 @@
-package sovelluslogiikka;
+package asteroids.sovelluslogiikka;
 
-import asteroids.asteroids.Game;
+
 import java.util.ArrayList;
 import java.util.Random;
-import scores.Highscore;
+import asteroids.scores.Highscore;
 
 /**
  * Handles the physics and running of the game.
  */
 public class Physics {
-
+/**
+ * The ArrayList storing all the asteroids in existence.
+ */
     private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+    /**
+     * The ArrayList storing all the lasers in existence.
+     */
     private ArrayList<Laser> lasers = new ArrayList<Laser>();
     private Random random = new Random();
+    /**
+     * The one and only ship.
+     */
     private Ship ship;
+    /**
+     * The height limit of the game.
+     */
     private int height;
+    /**
+     * The width limit of the game.
+     */
     private int width;
+    /**
+     * The boolean determining whether the level up screen should be drawn
+     * in the GUI.
+     */
     private boolean levelup = false;
+    /**
+     * The Highscore object.
+     */
     private Highscore hscore;
+    /**
+     * The score of the specific playthrough.
+     */
     private int score = 0;
+    /**
+     * Determines the speed of the asteroid movement.
+     */
     private double gameSpeed = 1;
+    /**
+     * Determines the amount of asteroids spawned at the beginning of each round.
+     */
     private int asteroidAmount = 20;
+    /**
+     * Determines if this is the first round, and if the start up screen should
+     * be displayed.
+     */
     private boolean firstRound = true;
 
     /**

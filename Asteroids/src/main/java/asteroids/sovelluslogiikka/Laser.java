@@ -1,4 +1,4 @@
-package sovelluslogiikka;
+package asteroids.sovelluslogiikka;
 
 import java.awt.Rectangle;
 

@@ -1,4 +1,4 @@
-package sovelluslogiikka;
+package asteroids.sovelluslogiikka;
 
 import java.awt.Rectangle;
 import java.awt.Polygon;
@@ -8,13 +8,34 @@ import java.awt.Polygon;
  */
 public class Ship extends VectorShape {
 
+    /**
+     * The x-coordinates for the outline of the ship.
+     */
     private int shipx[] = {-7, 7, 0};
+    /**
+     * The y-coordinates for the outline of the ship.
+     */
     private int shipy[] = {-7, -7, 14};
+    /**
+     * States whether the ship should turn anticlockwise.
+     */
     private boolean turningAntiClockwise = false;
+    /**
+     * States whether the ship should turn clockwise.
+     */
     private boolean turningClockwise = false;
+    /**
+     * States whether the ship should accelerate.
+     */
     private boolean accelerating = false;
+    /**
+     * States whether the ship should decelerate.
+     */
     private boolean decelerating = false;
-
+/**
+ * Creates a ship with the width and height of 8, and the outline of
+ * the points in shipx and shpiy.
+ */
     public Ship() {
         super();
         super.setShape(new Polygon(shipx, shipy, shipx.length));
@@ -90,5 +111,4 @@ public class Ship extends VectorShape {
     public void setDecelerating(boolean decelerating) {
         this.decelerating = decelerating;
     }
-    
 }

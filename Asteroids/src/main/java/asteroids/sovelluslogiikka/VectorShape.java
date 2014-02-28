@@ -1,4 +1,4 @@
-package sovelluslogiikka;
+package asteroids.sovelluslogiikka;
 
 import java.awt.Shape;
 
@@ -8,15 +8,42 @@ import java.awt.Shape;
  */
 public class VectorShape {
 
+    /**
+     * The counter used for determining the amount of times a laser has moved.
+     **/
     private int counter = 0;
+    /**
+     * The x and y coordinates of the shapes position.
+     */
     private double x, y;
+    /**
+     * The vectors of the shape on the X and Y axis.
+     */
     private double velX, velY;
+    /**
+     * The facing direction of the shape in degrees.
+     */
     private double faceDir;
+    /**
+     * True if the shape is classified as alive, false otherwise.
+     */
     private boolean alive;
+    /**
+     * The width of the shape.
+     */
     private int width;
+    /*
+     * The height of the shape.
+     */
     private int height;
+    /**
+     * The shape of the shape.
+     */
     private Shape shape;
 
+    /**
+     * VelX and Y are set to 0, the facing direction to 90, and alive as true.
+     */
     public VectorShape() {
         setVelX(0.0);
         setVelY(0.0);

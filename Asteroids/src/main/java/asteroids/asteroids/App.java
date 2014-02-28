@@ -1,23 +1,21 @@
 package asteroids.asteroids;
 
 import javax.swing.SwingUtilities;
-import kayttoliittyma.Menu;
+import asteroids.kayttoliittyma.Menu;
 
 /**
- * Contains the Apps main method, which starts up the App.
+ * Contains this Apps main method, which starts up the App and
+ * makes sure the two JFrames are not in existence at the same time.
+ *
  * @author JJV
  */
-
 public class App {
 
     public static void main(String[] args) {
 
-
-
-
         Game g = new Game();
         Menu m = new Menu(g);
-              SwingUtilities.invokeLater(m);
+        SwingUtilities.invokeLater(m);
 
 
         while (true) {

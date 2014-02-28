@@ -44,13 +44,18 @@
                 <version>0.30</version>
                 <configuration>
                     <targetClasses>
-                        <param>sovelluslogiikka.*</param>
+                        <param>asteroids.sovelluslogiikka.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>sovelluslogiikka.*</param>
+                        <param>asteroids.sovelluslogiikka.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+            </plugin> 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>

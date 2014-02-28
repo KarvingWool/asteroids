@@ -1,17 +1,17 @@
-package kayttoliittyma;
+package asteroids.kayttoliittyma;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * A KeyListener class, which defines functions for certain KeyEvents within the game.
  */
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import sovelluslogiikka.Physics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 public class ButtonResponse implements KeyListener {
 
     private Gui gui;
+    /**
+     * The time the spacebar's action was last succesfully done.
+     */
     private long lastPressed = 0;
 
     public ButtonResponse(Gui gui) {
