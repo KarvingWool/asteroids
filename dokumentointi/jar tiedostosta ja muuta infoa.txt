@@ -1,3 +1,7 @@
-Jar tiedosto toimii omalla koneellani, mutta en saanut sitä toimimaan muilla koneilla vaikka muutaman tunnin yritin. ircissä ei osattu auttaa, ja todettiin vain että pom tiedosto näyttää hyvältä.
+Jar tiedosto toimii omalla koneellani, mutta en saanut sitä toimimaan muilla koneilla vaikka muutaman tunnin yritin. ircissä ei osattu auttaa, ja ohjaaja totesi vain että pom tiedosto näyttää ihan hyvältä.
+.jar tiedosto sisälsi kaikki tarvittavat luokat when extracted, mutta popup ikkuna valittaa main luokan puuttumisesta.
 
-Myöskin InvokeLaterin implementaatio ei onnistunut edes ohjaajan turvin. Gameloopissani lienee yhteensopivuus ongelmia sen kanssa threadejen suhteen.... Mutta ainankin tällä hetkellä pitäis toimia.
+Myöskin InvokeLaterin implementaatio ei onnistunut edes ohjaajan turvin. Gameloopissani lienee yhteensopivuus ongelmia sen kanssa threadejen suhteen.... Mutta ainankin tällä hetkellä App itsessään pitäisi toimia.
+
+Sekvenssi kaavio sovelluslogiikasta valmiustilaan on valitettavasti vanhentunut.
+Ohjelma toimi tuolla tavalla siinä hetkessä, mutta game metodin ja Menun myötä setup prosessi vaihtui erilaiseksi. Pahoittelen vanhaa tietoa.
