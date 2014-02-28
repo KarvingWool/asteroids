@@ -1,0 +1,3 @@
+Jar tiedosto toimii omalla koneellani, mutta en saanut sitä toimimaan muilla koneilla vaikka muutaman tunnin yritin. ircissä ei osattu auttaa, ja todettiin vain että pom tiedosto näyttää hyvältä.
+
+Myöskin InvokeLaterin implementaatio ei onnistunut edes ohjaajan turvin. Gameloopissani lienee yhteensopivuus ongelmia sen kanssa threadejen suhteen.... Mutta ainankin tällä hetkellä pitäis toimia.
