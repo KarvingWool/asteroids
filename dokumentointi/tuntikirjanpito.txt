@@ -64,5 +64,5 @@ Canvasille piirrettävä teksti tuotu eteen, levelUpscreen saatu oikealle paikalle
 26.02.2014 22:00-04:00
 Tappelua ButtonResponsein kanssa että toimisi. Sitten että toimisi vaikka pelin JFrameiä klikkattaisi. Saatu toimimaan ButtonResponsein lisäyksellä canvakseenkin. InvokeLateriä yritetty saada toimimaan ilman menestystä. Koodin refaktorointia ja siistimistä, javadockejen luontia ja testejen kattavuuden laajennusta.
 
-28.02.2014 19:30-23:30
-Javadoc luontia atribuuteille. Jar tiedoston yritys. Refactorointia ja siistimistä.
+28.02.2014 18:30-23:30
+Javadoc luontia atribuuteille. Jar tiedoston luonti, ja sen toimimaan saamis yritys. Refactorointia ja siistimistä.
